@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       setTimeout(() => {
           isAnimating = false;
-      }, 750); // Match the transition duration
+      }, 1000); // Match the transition duration
 
       // Clear the timeout to prevent multiple triggers
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(() => {
           isAnimating = false;
-      }, 750); // Match the transition duration
+      }, 1000); // Match the transition duration
   }
 
   function handleScroll(event) {

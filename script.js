@@ -1,33 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
-    const cards = Array.from(document.querySelectorAll('.card'));
-    let currentCardIndex = 0;
-    
-    function setCardPosition(card, position) {
-      card.style.transform = `translateY(${position}px)`;
+  const cards = Array.from(document.querySelectorAll('.card'));
+  let currentCardIndex = 0;
+  let isAnimating = false;
+  let scrollTimeout;
+
+  function setCardPosition(card, position) {
+      card.style.transform = `translateY(${position}%)`;
       card.style.opacity = position === 0 ? '1' : '0';
-    }
-  
-    function updateCards() {
-      const viewportHeight = window.innerHeight;
+      card.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+  }
+
+  function updateCards() {
       cards.forEach((card, index) => {
-        const offset = index - currentCardIndex;
-        const position = offset * viewportHeight;
-        setCardPosition(card, position);
+          const offset = index - currentCardIndex;
+          const position = offset * 100;
+          setCardPosition(card, position);
       });
-    }
-  
-    function onScroll(event) {
-      if (event.deltaY > 0) {
-        currentCardIndex = (currentCardIndex + 1) % cards.length;
-      } else {
-        currentCardIndex = (currentCardIndex - 1 + cards.length) % cards.length;
-      }
+  }
+
+  function onScroll(event) {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      currentCardIndex = (currentCardIndex + 1) % cards.length;
       updateCards();
-    }
-  
-    window.addEventListener('wheel', onScroll);
-  
-    updateCards();
+
+      setTimeout(() => {
+          isAnimating = false;
+      }, 750); // Match the transition duration
+
+      // Clear the timeout to prevent multiple triggers
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+          isAnimating = false;
+      }, 750); // Match the transition duration
+  }
+
+  function handleScroll(event) {
+      event.preventDefault();
+      if (!isAnimating) {
+          onScroll(event);
+      }
+  }
+
+  window.addEventListener('wheel', handleScroll, { passive: false });
+
+  // Prevent default scrolling behavior
+  window.addEventListener('scroll', (event) => {
+      event.preventDefault();
+      window.scrollTo(0, 0);
   });
-  
+
+  updateCards();
+});

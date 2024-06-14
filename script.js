@@ -1,4 +1,4 @@
-import { Application } from 'node_modules/@splinetool/runtime/build/runtime.js';
+import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));

@@ -1,4 +1,4 @@
-import { Application } from './node_modules/@splinetool/runtime';
+import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
@@ -56,4 +56,19 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCards();
     
     // Spline runtime integration
+});
+const canvas = document.getElementById('canvas1');
+const spline = new Application(canvas);
+spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then(() => {
+  spline.addEventListener('mouseup', (e) => {
+    const LinkPress = spline.getVariable('didlinkpress');
+    const WWWPress = spline.getVariable('didwwwpress');
+    if (WWWPress) {
+      // Do something if the boolean variable is true
+      window.location.href = "http://www.w3schools.com";
+    } else if (LinkPress) {
+      // Do something if the boolean variable is false
+      window.location.href = "http://www.apple.com";
+    }
+  });
 });

@@ -1,0 +1,46 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Google Sign-in Example</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Firebase Google Sign-in Example</h1>
+    <button id="btn-login">Sign in with Google</button>
+  </div>
+
+  <!-- Firebase scripts -->
+  <script type="module">
+    import { initializeApp } from "./node_modules/firebase/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup } from "./node_modules/firebase/firebase-auth.js";
+    import { firebaseConfig } from "./firebase-config.js";
+
+    // Initialize Firebase
+    const firebaseApp = initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+
+    // DOM elements
+    const btnLogin = document.getElementById('btn-login');
+
+    // Sign in with Google popup
+    btnLogin.addEventListener('click', () => {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          // User signed in successfully
+          console.log(result.user);
+          alert('Signed in successfully!');
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error(error.message);
+          alert(`Sign in failed: ${error.message}`);
+        });
+    });
+  </script>
+</body>
+</html>

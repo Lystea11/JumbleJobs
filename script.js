@@ -1,7 +1,10 @@
+import { Application } from './node_modules/@splinetool/runtime';
+
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
     let currentCardIndex = 0;
     let isAnimating = false;
+    let scrollTimeout;
 
     function setCardPosition(card, position) {
         card.style.transform = `translateY(${position}%)`;
@@ -27,24 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             isAnimating = false;
         }, 1000); // Match the transition duration
-    }
 
-    function debounce(func, delay) {
-        let timeoutId;
-        return function(...args) {
-            if (timeoutId) clearTimeout(timeoutId);
-            timeoutId = setTimeout(() => {
-                func.apply(this, args);
-            }, delay);
-        };
+        // Clear the timeout to prevent multiple triggers
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            isAnimating = false;
+        }, 1000); // Match the transition duration
     }
-
-    const debouncedOnScroll = debounce(onScroll, 300); // Adjust delay as needed
 
     function handleScroll(event) {
         event.preventDefault();
         if (!isAnimating) {
-            debouncedOnScroll(event);
+            onScroll(event);
         }
     }
 
@@ -57,4 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateCards();
+    
+    // Spline runtime integration
 });

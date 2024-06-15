@@ -22,7 +22,7 @@
 <div class="account-menu" id="accountMenu">
   <a href="#" id="likedJobs">Liked Jobs</a>
   <a href="#" id="accountInfoMenu">Account Info</a>
-  <a href="#" id="logout">Log Out</a>
+  <a href="#" id="authAction"></a>
 </div>
 
 <script type="module">
@@ -43,8 +43,7 @@
     const accountMenu = document.getElementById('accountMenu');
     const likedJobs = document.getElementById('likedJobs');
     const accountInfoMenu = document.getElementById('accountInfoMenu');
-    const logout = document.getElementById('logout');
-    const login = document.getElementById('login');
+    const authAction = document.getElementById('authAction');
 
     // Toggle account menu
     accountInfo.addEventListener('click', () => {
@@ -62,47 +61,45 @@
       window.location.href = 'account-info.html';
     });
 
-    logout.addEventListener('click', () => {
-      signOut(auth).then(() => {
-        alert('Signed out successfully!');
-        setDoc(doc(firestore, 'userStatus', auth.currentUser.uid), {
-          isLoggedIn: false
-        }).then(() => {
+    // Authentication action (login/logout)
+    authAction.addEventListener('click', () => {
+      if (auth.currentUser) {
+        // User is signed in, perform sign out
+        signOut(auth).then(() => {
+          alert('Signed out successfully!');
           window.location.href = 'index.html';
+        }).catch((error) => {
+          console.error('Error signing out: ', error);
+          alert('Sign-out failed. Please try again.');
         });
-      }).catch((error) => {
-        console.error('Error signing out: ', error);
-        alert('Sign-out failed. Please try again.');
-      });
-    });
-
-    login.addEventListener('click', () => {
-      window.location.href = 'login.html';
-    });
-
-    // Check authentication state and update UI
-    const userDocRef = doc(firestore, 'userStatus', auth.currentUser?.uid || 'default');
-    getDoc(userDocRef).then((docSnap) => {
-      if (docSnap.exists() && docSnap.data().isLoggedIn) {
-        const user = auth.currentUser;
-        if (user) {
-          // User is signed in
-          logout.style.display = 'block';
-          login.style.display = 'none';
-          accountInfo.style.backgroundImage = `url(${user.photoURL})`;
-          accountInfo.textContent = '';
-        } else {
-          // User is signed out
-          logout.style.display = 'none';
-          login.style.display = 'block';
-          accountInfo.style.backgroundImage = '';
-          accountInfo.textContent = 'AI';
-        }
       } else {
-        logout.style.display = 'none';
-        login.style.display = 'block';
+        // User is signed out, redirect to login page
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Listen for authentication state changes
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, fetch user data from Firestore
+        const userRef = doc(firestore, 'users', user.uid);
+        getDoc(userRef).then((docSnap) => {
+          if (docSnap.exists()) {
+            const userData = docSnap.data();
+            accountInfo.style.backgroundImage = `url(${userData.photoURL})`;
+            accountInfo.textContent = '';
+            authAction.textContent = 'Log Out';
+          } else {
+            console.log('No such document!');
+          }
+        }).catch((error) => {
+          console.log('Error getting document:', error);
+        });
+      } else {
+        // User is signed out
         accountInfo.style.backgroundImage = '';
         accountInfo.textContent = 'AI';
+        authAction.textContent = 'Log In';
       }
     });
 
@@ -116,6 +113,5 @@
     console.error('Error setting persistence: ', error);
   });
 </script>
-<script type="module" src="script.js"></script>
 </body>
 </html>

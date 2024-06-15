@@ -25,6 +25,13 @@
   <a href="#" id="authAction"></a>
 </div>
 
+<div class="overlay" id="overlay">
+  <div class="overlay-message">
+    <p>You must be logged in to access this page.</p>
+    <button id="segueToLogin">Log In</button>
+  </div>
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
   import { getAuth, setPersistence, browserLocalPersistence, signOut } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
@@ -44,6 +51,8 @@
     const likedJobs = document.getElementById('likedJobs');
     const accountInfoMenu = document.getElementById('accountInfoMenu');
     const authAction = document.getElementById('authAction');
+    const overlay = document.getElementById('overlay');
+    const segueToLogin = document.getElementById('segueToLogin');
 
     // Toggle account menu
     accountInfo.addEventListener('click', () => {
@@ -89,6 +98,7 @@
             accountInfo.style.backgroundImage = `url(${userData.photoURL})`;
             accountInfo.textContent = '';
             authAction.textContent = 'Log Out';
+            overlay.style.display = 'none'; // Hide overlay if logged in
           } else {
             console.log('No such document!');
           }
@@ -96,10 +106,11 @@
           console.log('Error getting document:', error);
         });
       } else {
-        // User is signed out
+        // User is signed out, show overlay
         accountInfo.style.backgroundImage = '';
         accountInfo.textContent = 'AI';
         authAction.textContent = 'Log In';
+        overlay.style.display = 'flex'; // Show overlay if logged out
       }
     });
 
@@ -108,6 +119,11 @@
       if (!accountInfo.contains(event.target) && !accountMenu.contains(event.target)) {
         accountMenu.style.display = 'none';
       }
+    });
+
+    // Redirect to login page on segue button click
+    segueToLogin.addEventListener('click', () => {
+      window.location.href = 'login.html';
     });
   }).catch((error) => {
     console.error('Error setting persistence: ', error);

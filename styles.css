@@ -20,7 +20,7 @@ body, html {
   color: white;
   cursor: pointer;
   z-index: 1000;
-  background-size: contain no-repeat;
+  background-size: cover;
   background-position: center;
 }
 

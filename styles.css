@@ -20,6 +20,8 @@ body, html {
   color: white;
   cursor: pointer;
   z-index: 1000;
+  background-size: cover;
+  background-position: center;
 }
 
 .account-menu {

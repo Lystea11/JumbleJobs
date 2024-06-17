@@ -39,8 +39,6 @@ body {
   
   button:hover {
     background-color: #3b79db;
-    transition: all 1 ease-in-out;
-    transform: scale(1.2);
   }
   
   @keyframes fade-in {

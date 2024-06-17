@@ -63,12 +63,16 @@ spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then
   spline.addEventListener('mouseup', (e) => {
     const LinkPress = spline.getVariable('didlinkpress');
     const WWWPress = spline.getVariable('didwwwpress');
+    const likedJob = spline.getVariable('DidLike');
     if (WWWPress) {
       // Do something if the boolean variable is true
       window.location.href = "http://www.w3schools.com";
     } else if (LinkPress) {
       // Do something if the boolean variable is false
       window.location.href = "http://www.apple.com";
+    } else if (likedJob) {
+        window.location.href = "http://www.amazon.co.jp"
     }
+
   });
 });

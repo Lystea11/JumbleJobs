@@ -97,6 +97,6 @@ const loadSplineScene = async (canvasId, url) => {
 };
 
 const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
-loadSplineScene('canvas1', sceneUrl);
+// loadSplineScene('canvas1', sceneUrl);
 loadSplineScene('canvas2', sceneUrl);
 loadSplineScene('canvas3', sceneUrl);

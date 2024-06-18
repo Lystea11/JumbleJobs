@@ -1,4 +1,6 @@
+javascript
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
+import { getFirestore, doc, updateDoc, arrayUnion } from "firebase/firestore"; 
 
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
@@ -54,25 +56,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateCards();
-    
+
     // Spline runtime integration
 });
+
 const canvas = document.getElementById('canvas1');
 const spline = new Application(canvas);
 spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then(() => {
-  spline.addEventListener('mouseup', (e) => {
-    const LinkPress = spline.getVariable('didlinkpress');
-    const WWWPress = spline.getVariable('didwwwpress');
-    const likedJob = spline.getVariable('DidLike');
-    if (WWWPress) {
-      // Do something if the boolean variable is true
-      window.location.href = "http://www.w3schools.com";
-    } else if (LinkPress) {
-      // Do something if the boolean variable is false
-      window.location.href = "http://www.apple.com";
-    } else if (likedJob) {
-        window.location.href = "http://www.amazon.co.jp"
-    }
+    spline.addEventListener('mouseup', async (e) => {
+        const LinkPress = spline.getVariable('didlinkpress');
+        const WWWPress = spline.getVariable('didwwwpress');
+        const likedJob = spline.getVariable('DidLike');
 
-  });
+        if (WWWPress) {
+            // Do something if the boolean variable is true
+            window.location.href = "http://www.w3schools.com";
+        } else if (LinkPress) {
+            // Do something if the boolean variable is false
+            window.location.href = "http://www.apple.com";
+        } else if (likedJob) {
+            // FEATURE: Add the current card index to the list of liked jobs in Firestore
+            const db = getFirestore();
+            const userDocRef = doc(db, 'users', 'userId'); // Replace 'userId' with the actual user ID
+            try {
+                await updateDoc(userDocRef, {
+                    indexLiked: arrayUnion(currentCardIndex + 1)
+                });
+                console.log('Liked job index added to Firestore');
+            } catch (error) {
+                console.error('Error updating document: ', error);
+            }
+        }
+    });
 });

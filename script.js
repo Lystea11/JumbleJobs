@@ -1,10 +1,10 @@
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
 import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"; 
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
-let currentCardIndex = 0;
+
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
-    
+    let currentCardIndex = 0;
     let isAnimating = false;
     let scrollTimeout;
 
@@ -57,14 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateCards();
 
-    // Spline runtime integration
+    // Load Spline scene for each canvas
+    const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
+    ['canvas1', 'canvas2', 'canvas3'].forEach(canvasId => {
+        loadSplineScene(canvasId, sceneUrl);
+    });
 });
 
-
-const loadSplineScene = async (canvasId, url) => {
+async function loadSplineScene(canvasId, url) {
     const canvas = document.getElementById(canvasId);
     const spline = new Application(canvas);
     await spline.load(url);
+
+    // Remove any existing event listeners to prevent duplicates
+    spline.removeAllEventListeners(); 
+
+    // Add new event listener for each canvas
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
@@ -94,9 +102,4 @@ const loadSplineScene = async (canvasId, url) => {
             });
         }
     });
-};
-
-const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
-// loadSplineScene('canvas1', sceneUrl);
-loadSplineScene('canvas2', sceneUrl);
-loadSplineScene('canvas3', sceneUrl);
+}

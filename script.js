@@ -1,6 +1,7 @@
 javascript
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
-import { getFirestore, doc, updateDoc, arrayUnion } from "firebase/firestore"; 
+import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"; 
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Spline runtime integration
 });
 
+
 const canvas = document.getElementById('canvas1');
 const spline = new Application(canvas);
 spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then(() => {
@@ -75,17 +77,24 @@ spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then
             // Do something if the boolean variable is false
             window.location.href = "http://www.apple.com";
         } else if (likedJob) {
-            // FEATURE: Add the current card index to the list of liked jobs in Firestore
-            const db = getFirestore();
-            const userDocRef = doc(db, 'users', 'userId'); // Replace 'userId' with the actual user ID
-            try {
-                await updateDoc(userDocRef, {
-                    indexLiked: arrayUnion(currentCardIndex + 1)
-                });
-                console.log('Liked job index added to Firestore');
-            } catch (error) {
-                console.error('Error updating document: ', error);
-            }
+            // Get the authenticated user
+            const auth = getAuth();
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const db = getFirestore();
+                    const userDocRef = doc(db, 'users', user.uid);
+                    try {
+                        await updateDoc(userDocRef, {
+                            indexLiked: arrayUnion(currentCardIndex + 1)
+                        });
+                        console.log('Liked job index added to Firestore');
+                    } catch (error) {
+                        console.error('Error updating document: ', error);
+                    }
+                } else {
+                    console.log('No user is signed in');
+                }
+            });
         }
     });
 });

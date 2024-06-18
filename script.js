@@ -61,22 +61,20 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-const canvas = document.getElementById('canvas1');
-const spline = new Application(canvas);
-spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then(() => {
+const loadSplineScene = async (canvasId, url) => {
+    const canvas = document.getElementById(canvasId);
+    const spline = new Application(canvas);
+    await spline.load(url);
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
         const likedJob = spline.getVariable('DidLike');
 
         if (WWWPress) {
-            // Do something if the boolean variable is true
             window.location.href = "http://www.w3schools.com";
         } else if (LinkPress) {
-            // Do something if the boolean variable is false
             window.location.href = "http://www.apple.com";
         } else if (likedJob) {
-            // Get the authenticated user
             const auth = getAuth();
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
@@ -96,4 +94,9 @@ spline.load('https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode').then
             });
         }
     });
-});
+};
+
+const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
+loadSplineScene('canvas1', sceneUrl);
+loadSplineScene('canvas2', sceneUrl);
+loadSplineScene('canvas3', sceneUrl);

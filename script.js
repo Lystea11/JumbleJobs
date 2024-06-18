@@ -1,4 +1,3 @@
-javascript
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
 import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"; 
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";

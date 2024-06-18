@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTimeout = setTimeout(() => {
             isAnimating = false;
         }, 1000); // Match the transition duration
+
+        // Re-attach event listeners after scroll animation
+        attachEventListeners(currentCardIndex);
     }
 
     function handleScroll(event) {
@@ -69,10 +72,7 @@ async function loadSplineScene(canvasId, url) {
     const spline = new Application(canvas);
     await spline.load(url);
 
-    // Remove any existing event listeners to prevent duplicates
-    spline.removeAllEventListeners(); 
-
-    // Add new event listener for each canvas
+    // Add event listener for each canvas
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
@@ -102,4 +102,24 @@ async function loadSplineScene(canvasId, url) {
             });
         }
     });
+}
+
+function attachEventListeners(index) {
+    // Detach all event listeners first
+    ['canvas1', 'canvas2', 'canvas3'].forEach(canvasId => {
+        const canvas = document.getElementById(canvasId);
+        canvas.removeEventListener('mouseup', handleCanvasInteraction);
+    });
+
+    // Attach event listener to the current visible canvas
+    const visibleCanvasId = `canvas${index + 1}`;
+    const visibleCanvas = document.getElementById(visibleCanvasId);
+    visibleCanvas.addEventListener('mouseup', handleCanvasInteraction);
+}
+
+function handleCanvasInteraction(event) {
+    const canvasId = event.target.id;
+    // Handle interactions based on canvas ID if needed
+    console.log(`Interaction on canvas ${canvasId}`);
+    // Add your interaction logic here
 }

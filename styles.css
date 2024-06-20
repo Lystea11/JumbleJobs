@@ -76,7 +76,6 @@ body, html {
   height: 100vh;
   width: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: #fff;
@@ -86,16 +85,13 @@ body, html {
   position: absolute;
   width: 100%;
   height: 100vh;
-
-
-  background-color: #fff;
-
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   opacity: 0;
   transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateX(100%);
 }
 
 .card.active {
@@ -103,7 +99,10 @@ body, html {
   transform: translateX(0);
 }
 
-spline-viewer {
-  width: 100%;
-  height: 100%;
+.card.exit-left {
+  transform: translateX(-100%);
+}
+
+.card.enter-right {
+  transform: translateX(100%);
 }

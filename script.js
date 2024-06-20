@@ -1,78 +1,60 @@
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
-import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"; 
+import { getFirestore, doc, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+
+let currentCardIndex = 0;
+let isAnimating = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
-    let currentCardIndex = 0;
-    let isAnimating = false;
-    let scrollTimeout;
-
-    function setCardPosition(card, position) {
-        card.style.transform = `translateY(${position}%)`;
-        card.style.opacity = position === 0 ? '1' : '0';
-        card.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
-    }
 
     function updateCards() {
         cards.forEach((card, index) => {
-            const offset = index - currentCardIndex;
-            const position = offset * 100;
-            setCardPosition(card, position);
+            card.classList.remove('active', 'exit-left', 'enter-right');
+            if (index === currentCardIndex) {
+                card.classList.add('active');
+            } else if (index < currentCardIndex) {
+                card.classList.add('exit-left');
+            } else {
+                card.classList.add('enter-right');
+            }
         });
     }
 
-    function onScroll(event) {
-        if (isAnimating) return;
-        isAnimating = true;
-
-        currentCardIndex = (currentCardIndex + 1) % cards.length;
-        updateCards();
-
-        setTimeout(() => {
-            isAnimating = false;
-        }, 1000); // Match the transition duration
-
-        // Clear the timeout to prevent multiple triggers
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-            isAnimating = false;
-        }, 1000); // Match the transition duration
-
-        // Re-attach event listeners after scroll animation
-        attachEventListeners(currentCardIndex);
-    }
-
-    function handleScroll(event) {
-        event.preventDefault();
-        if (!isAnimating) {
-            onScroll(event);
+    function moveNext() {
+        if (currentCardIndex < cards.length - 1) {
+            currentCardIndex++;
+            updateCards();
         }
     }
 
-    window.addEventListener('wheel', handleScroll, { passive: false });
+    function movePrev() {
+        if (currentCardIndex > 0) {
+            currentCardIndex--;
+            updateCards();
+        }
+    }
 
-    // Prevent default scrolling behavior
-    window.addEventListener('scroll', (event) => {
-        event.preventDefault();
-        window.scrollTo(0, 0);
+    document.addEventListener('keydown', (event) => {
+        if (isAnimating) return;
+        isAnimating = true;
+        if (event.key === 'ArrowRight') {
+            moveNext();
+        } else if (event.key === 'ArrowLeft') {
+            movePrev();
+        }
+        setTimeout(() => {
+            isAnimating = false;
+        }, 600); // Match the transition duration
     });
 
     updateCards();
-
-    // Load Spline scene for each canvas
-    const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
-    ['canvas1', 'canvas2', 'canvas3'].forEach(canvasId => {
-        loadSplineScene(canvasId, sceneUrl);
-    });
 });
 
-async function loadSplineScene(canvasId, url) {
+const loadSplineScene = async (canvasId, url) => {
     const canvas = document.getElementById(canvasId);
     const spline = new Application(canvas);
     await spline.load(url);
-
-    // Add event listener for each canvas
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
@@ -102,24 +84,9 @@ async function loadSplineScene(canvasId, url) {
             });
         }
     });
-}
+};
 
-function attachEventListeners(index) {
-    // Detach all event listeners first
-    ['canvas1', 'canvas2', 'canvas3'].forEach(canvasId => {
-        const canvas = document.getElementById(canvasId);
-        canvas.removeEventListener('mouseup', handleCanvasInteraction);
-    });
-
-    // Attach event listener to the current visible canvas
-    const visibleCanvasId = `canvas${index + 1}`;
-    const visibleCanvas = document.getElementById(visibleCanvasId);
-    visibleCanvas.addEventListener('mouseup', handleCanvasInteraction);
-}
-
-function handleCanvasInteraction(event) {
-    const canvasId = event.target.id;
-    // Handle interactions based on canvas ID if needed
-    console.log(`Interaction on canvas ${canvasId}`);
-    // Add your interaction logic here
-}
+const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
+loadSplineScene('canvas1', sceneUrl);
+loadSplineScene('canvas2', sceneUrl);
+loadSplineScene('canvas3', sceneUrl);

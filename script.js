@@ -1,6 +1,6 @@
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
 import { getFirestore, doc, updateDoc, arrayUnion } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
-import { getAuth, onAuthStateChanged } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
+import { getAuth, onAuthStateChanged } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth.min.js";
 
 let currentCardIndex = 0;
 let isAnimating = false;

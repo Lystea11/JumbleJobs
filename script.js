@@ -1,12 +1,16 @@
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
 import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
 import { getAuth, onAuthStateChanged } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth.min.js";
+import { initializeApp } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app.min.js";
+import { firebaseConfig } from "./firebase-config.js";
 
 let currentCardIndex = 0;
 let isAnimating = false;
 
-const db = getFirestore();
-const auth = getAuth();
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 let currentUser = null;
 
 // Listen for authentication state changes

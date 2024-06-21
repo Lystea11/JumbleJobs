@@ -1,9 +1,43 @@
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
-import { getFirestore, doc, updateDoc, arrayUnion } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
+import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
 import { getAuth, onAuthStateChanged } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth.min.js";
 
 let currentCardIndex = 0;
 let isAnimating = false;
+
+const db = getFirestore();
+const auth = getAuth();
+let currentUser = null;
+
+// Listen for authentication state changes
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+    } else {
+        currentUser = null;
+    }
+});
+
+
+async function updateUserIndexLiked(operation, index) {
+    if (!currentUser) return;
+
+    const userRef = doc(db, "users", currentUser.uid);
+
+    try {
+        if (operation === 'add') {
+            await updateDoc(userRef, {
+                indexLiked: arrayUnion(index)
+            });
+        } else if (operation === 'remove') {
+            await updateDoc(userRef, {
+                indexLiked: arrayRemove(index)
+            });
+        }
+    } catch (error) {
+        console.error("Error updating document: ", error);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
@@ -24,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentCardIndex++;
                 console.log("went right");
                 updateCards();
+                updateUserIndexLiked('add', currentCardIndex);
             }, 600); // Match the transition duration
         }
     }
@@ -35,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentCardIndex++;
                 console.log("went left");
                 updateCards();
+                updateUserIndexLiked('remove', currentCardIndex);
             }, 600); // Match the transition duration
         }
     }

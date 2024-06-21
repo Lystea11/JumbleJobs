@@ -20,18 +20,22 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveNext() {
         if (currentCardIndex < cards.length - 1) {
             cards[currentCardIndex].classList.add('exit-right');
-            currentCardIndex++;
-            console.log("went right");
-            updateCards();
+            setTimeout(() => {
+                currentCardIndex++;
+                console.log("went right");
+                updateCards();
+            }, 600); // Match the transition duration
         }
     }
 
     function movePrev() {
         if (currentCardIndex < cards.length - 1) {
             cards[currentCardIndex].classList.add('exit-left');
-            currentCardIndex++;
-            console.log("went left");
-            updateCards();
+            setTimeout(() => {
+                currentCardIndex++;
+                console.log("went left");
+                updateCards();
+            }, 600); // Match the transition duration
         }
     }
 
@@ -45,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isAnimating = true;
         setTimeout(() => {
             isAnimating = false;
-        }, 400); // Match the transition duration
+        }, 600); // Match the transition duration
     });
 
     updateCards();

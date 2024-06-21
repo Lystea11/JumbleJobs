@@ -1,7 +1,6 @@
-import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
-import { initializeApp } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app.min.js";
-import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
-import { getAuth, onAuthStateChanged } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth.min.js";
+import { initializeApp } from "https://unpkg.com/browse/firebase@10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://unpkg.com/browse/firebase@10.12.2/firebase-auth.js";
+import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://unpkg.com/browse/firebase@10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 let currentCardIndex = 0;
@@ -10,7 +9,7 @@ let isAnimating = false;
 // Initialize Firebase app
 const firebaseApp = initializeApp(firebaseConfig);
 
-// Initialize Firebase services
+// Ensure that Firebase Auth and Firestore are registered
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 

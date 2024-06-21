@@ -94,28 +94,27 @@ body, html {
   border-radius: 10px;
   opacity: 0;
   transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.card canvas {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+  pointer-events: none; /* Prevent interaction when not active */
 }
 
 .card.active {
   opacity: 1;
   transform: translateX(0);
+  pointer-events: auto; /* Allow interaction when active */
+  z-index: 1; /* Ensure active card is on top */
 }
 
 .card.exit-left, .card.exit-right {
   opacity: 1;
-  transition: transform 0.4s ease, opacity 0.4s ease;
+  transition: transform 0.4s ease;
 }
 
 .card.exit-left {
   transform: translateX(-100vw);
+  z-index: 0; /* Ensure non-active cards are below */
 }
 
 .card.exit-right {
   transform: translateX(100vw);
+  z-index: 0; /* Ensure non-active cards are below */
 }

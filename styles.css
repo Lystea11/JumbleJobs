@@ -114,10 +114,8 @@ body, html {
 
 .card.exit-left {
   transform: translateX(-100vw);
-  opacity: 0;
 }
 
 .card.exit-right {
   transform: translateX(100vw);
-  opacity: 0;
 }

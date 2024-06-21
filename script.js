@@ -8,19 +8,8 @@ let currentCardIndex = 0;
 let isAnimating = false;
 
 
-const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth(firebaseApp);
-const db = getFirestore(firebaseApp);
-let currentUser = null;
 
-// Listen for authentication state changes
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        currentUser = user;
-    } else {
-        currentUser = null;
-    }
-});
+
 
 
 async function updateUserIndexLiked(operation, index) {
@@ -43,7 +32,23 @@ async function updateUserIndexLiked(operation, index) {
     }
 }
 
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+    } else {
+        currentUser = null;
+    }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
+    const firebaseApp = initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+    const db = getFirestore(firebaseApp);
+
+    let currentUser = null;
+
+    // Listen for authentication state changes
+
     const cards = Array.from(document.querySelectorAll('.card'));
 
     function updateCards() {

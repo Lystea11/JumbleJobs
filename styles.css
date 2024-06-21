@@ -118,3 +118,13 @@ body, html {
   transform: translateX(100vw);
   z-index: 0; /* Ensure non-active cards are below */
 }
+
+.card.fade-out-left {
+  transform: translateX(-100vw);
+  opacity: 0;
+}
+
+.card.fade-out-right {
+  transform: translateX(100vw);
+  opacity: 0;
+}

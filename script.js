@@ -1,16 +1,29 @@
 import { Application } from './node_modules/@splinetool/runtime/build/runtime.js';
+import { initializeApp } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app.min.js";
 import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-firestore.min.js";
 import { getAuth, onAuthStateChanged } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-auth.min.js";
-import { initializeApp } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/10.12.2/firebase-app.min.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 let currentCardIndex = 0;
 let isAnimating = false;
 
+// Initialize Firebase app
+const firebaseApp = initializeApp(firebaseConfig);
 
+// Initialize Firebase services
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
 
+let currentUser = null;
 
-
+// Listen for authentication state changes
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        currentUser = user;
+    } else {
+        currentUser = null;
+    }
+});
 
 async function updateUserIndexLiked(operation, index) {
     if (!currentUser) return;
@@ -32,22 +45,8 @@ async function updateUserIndexLiked(operation, index) {
     }
 }
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        currentUser = user;
-    } else {
-        currentUser = null;
-    }
-});
 
 document.addEventListener('DOMContentLoaded', () => {
-    const firebaseApp = initializeApp(firebaseConfig);
-    const auth = getAuth(firebaseApp);
-    const db = getFirestore(firebaseApp);
-
-    let currentUser = null;
-
-    // Listen for authentication state changes
 
     const cards = Array.from(document.querySelectorAll('.card'));
 

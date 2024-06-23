@@ -20,7 +20,16 @@ function shuffle(array) {
     }
   }
 
-let mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":7,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":8,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":9,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":10,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}];
+let mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":7,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":8,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":9,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+    {"id":10,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}];
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);

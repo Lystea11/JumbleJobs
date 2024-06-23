@@ -4,6 +4,26 @@ import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://w
 import { firebaseConfig } from "./firebase-config.js";
 import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.7.6/build/runtime.min.js';
 
+function shuffle(array) {
+    let currentIndex = array.length;
+  
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+  
+      // Pick a remaining element...
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+  
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+  }
+
+let mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":7,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":8,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":9,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, {"id":10,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}];
+let sortedList = mainList;
+shuffle(sortedList);
+console.log(sortedList);
 let currentCardIndex = 0;
 let isAnimating = false;
 
@@ -29,15 +49,22 @@ async function updateUserIndexLiked(operation, index) {
     if (!currentUser) return;
 
     const userRef = doc(db, "users", currentUser.uid);
+    const element = mainList.find(item => item.id === index);
+    const code = element ? element.code : null;
+
+    if (!code) {
+        console.error("ID not found in the array");
+        return;
+    }
 
     try {
         if (operation === 'add') {
             await updateDoc(userRef, {
-                indexLiked: arrayUnion(index)
+                indexLiked: arrayUnion(code)
             });
         } else if (operation === 'remove') {
             await updateDoc(userRef, {
-                indexLiked: arrayRemove(index)
+                indexLiked: arrayRemove(code)
             });
         }
     } catch (error) {

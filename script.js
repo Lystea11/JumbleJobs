@@ -140,26 +140,9 @@ const loadSplineScene = async (canvasId, url) => {
         } 
     });
 };
-// const auth = getAuth();
-// onAuthStateChanged(auth, async (user) => {
-//     if (user) {
-//         const db = getFirestore();
-//         const userDocRef = doc(db, 'users', user.uid);
-//         try {
-//             await updateDoc(userDocRef, {
-//                 indexLiked: arrayUnion(currentCardIndex + 1)
-//             });
-//             console.log('Liked job index added to Firestore');
-//         } catch (error) {
-//             console.error('Error updating document: ', error);
-//         }
-//     } else {
-//         console.log('No user is signed in');
-//     }
-// });
 
-const sceneUrl = 'https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode';
-loadSplineScene('canvas1', sceneUrl);
-loadSplineScene('canvas2', sceneUrl);
-loadSplineScene('canvas3', sceneUrl);
-loadSplineScene('canvas4', sceneUrl);
+
+sortedList.forEach((element, index) => {
+    console.log(index);
+    loadSplineScene("canvas" + index,element.code);
+});

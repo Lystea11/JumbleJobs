@@ -45,12 +45,13 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+const codeMap = new Map(sortedList.map(item => [item.id, item.code]));
+
 async function updateUserIndexLiked(operation, index) {
     if (!currentUser) return;
 
     const userRef = doc(db, "users", currentUser.uid);
-    const element = mainList.find(item => item.id === index);
-    const code = element ? element.code : null;
+    const code = codeMap.get(index);
 
     if (!code) {
         console.error("ID not found in the array");
@@ -71,7 +72,6 @@ async function updateUserIndexLiked(operation, index) {
         console.error("Error updating document: ", error);
     }
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
 

@@ -1,6 +1,6 @@
-import { initializeApp } from "https://unpkg.com/browse/firebase@10.12.2/firebase-app.js";
-import { getAuth, onAuthStateChanged } from "https://unpkg.com/browse/firebase@10.12.2/firebase-auth.js";
-import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://unpkg.com/browse/firebase@10.12.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 
 let currentCardIndex = 0;

@@ -20,7 +20,7 @@ function shuffle(array) {
     }
   }
 
-let mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
+export const mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
     {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
     {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
     {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 

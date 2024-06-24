@@ -13,9 +13,34 @@
             Hello
         </div>
         <script type="module">
-            import { mainList } from "./script.js"
-            console.log(mainList)
+            import { mainList } from "./script.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+            import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+            import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+            import { firebaseConfig } from "./firebase-config.js";
 
+            const firebaseApp = initializeApp(firebaseConfig);
+            const auth = getAuth(firebaseApp);
+            const firestore = getFirestore(firebaseApp);
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const userDocRef = doc(firestore, `users/${user.uid}`);
+                    const userDocSnap = await getDoc(userDocRef);
+
+                    if (userDocSnap.exists()) {
+                        const userData = userDocSnap.data();
+                        const indexLiked = userData.indexLiked || [];
+
+                        const matchedItems = mainList.filter(item => indexLiked.includes(item.code));
+                        console.log(matchedItems);
+                    } else {
+                        console.log("No such document!");
+                    }
+                } else {
+                    console.log("No user is signed in.");
+                }
+            });
         </script>
     </body>
 </html>

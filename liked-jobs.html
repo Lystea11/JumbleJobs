@@ -136,6 +136,7 @@
                         const indexLiked = userData.indexLiked || [];
 
                         matchedItems = mainList.filter(item => indexLiked.includes(item.code));
+                        ListLoaded();
                         console.log(matchedItems);
                     } else {
                         console.log("No such document!");
@@ -144,15 +145,13 @@
                     console.log("No user is signed in.");
                 }
             });
-
+        function ListLoaded() {
             if (matchedItems != null) {
-                // Loop through matched items and get the id, connect to firestore and append data
-                console.log("did stuff");
-                matchedItems.forEach((item) => {
-                    appendHtml(item.id)
-                })
-        }else { console.log("matched items null"); }
-
+            matchedItems.forEach((item) => {
+                appendHtml(item.id)
+            })
+        }
+        }
         async function appendHtml(id) {
             const userDocRef = doc(firestore, `data/${id}`);
             const userDocSnap = getDoc(userDocRef);

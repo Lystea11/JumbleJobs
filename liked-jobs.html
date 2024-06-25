@@ -154,7 +154,7 @@
         }
         async function appendHtml(id) {
             const userDocRef = doc(firestore, `data/${id}`);
-            const userDocSnap = getDoc(userDocRef);
+            const userDocSnap = await getDoc(userDocRef);
             if (userDocSnap.exists()) {
                 
                 const userData = userDocSnap.data();

@@ -160,7 +160,7 @@
             const firebaseApp = initializeApp(firebaseConfig);
             const auth = getAuth(firebaseApp);
             const firestore = getFirestore(firebaseApp);
-            const matchedItems = [];
+            var matchedItems = [];
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     userr = user
@@ -182,6 +182,7 @@
             });
 
             if (matchedItems != null) {
+                // Loop through matched items and get the id, connect to firestore and append data
                 const container = document.getElementById("container");
                 matchedItems.forEach(() => {
                     const card = document.createElement('div');

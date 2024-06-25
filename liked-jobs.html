@@ -147,6 +147,7 @@
 
             if (matchedItems != null) {
                 // Loop through matched items and get the id, connect to firestore and append data
+                console.log("did stuff");
                 matchedItems.forEach((item) => {
                     appendHtml(item.id)
                 })

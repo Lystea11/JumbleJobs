@@ -150,7 +150,7 @@
                 matchedItems.forEach((item) => {
                     appendHtml(item.id)
                 })
-        }
+        }else { console.log("matched items null"); }
 
         async function appendHtml(id) {
             const userDocRef = doc(firestore, `data/${id}`);

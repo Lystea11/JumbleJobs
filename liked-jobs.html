@@ -112,42 +112,6 @@
     </head>
     <body>
         <div class="container">
-            <div class="card">
-                <div class="card-content">
-                    <h2 class="card-title">Card Title 1</h2>
-                    <p class="card-text">This is some example text to fill the card content.</p>
-                    <div class="card-action">
-                        <button>Learn More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h2 class="card-title">Card Title 2</h2>
-                    <p class="card-text">This is some example text to fill the card content.</p>
-                    <div class="card-action">
-                        <button>Learn More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h2 class="card-title">Card Title 2</h2>
-                    <p class="card-text">This is some example text to fill the card content.</p>
-                    <div class="card-action">
-                        <button>Learn More</button>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <h2 class="card-title">Card Title 2</h2>
-                    <p class="card-text">This is some example text to fill the card content.</p>
-                    <div class="card-action">
-                        <button>Learn More</button>
-                    </div>
-                </div>
-            </div>
             <!-- Add more cards as needed -->
         </div>
         <script type="module">
@@ -163,7 +127,7 @@
             var matchedItems = [];
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
-                    userr = user
+                    userr = user;
                     const userDocRef = doc(firestore, `users/${user.uid}`);
                     const userDocSnap = await getDoc(userDocRef);
 
@@ -183,36 +147,51 @@
 
             if (matchedItems != null) {
                 // Loop through matched items and get the id, connect to firestore and append data
+                matchedItems.forEach((item) => {
+                    appendHtml(item.id)
+                })
+        }
+
+        async function appendHtml(id) {
+            const userDocRef = doc(firestore, `data/${id}`);
+            const userDocSnap = getDoc(userDocRef);
+            if (userDocSnap.exists()) {
+                
+                const userData = userDocSnap.data();
+
                 const container = document.getElementById("container");
-                matchedItems.forEach(() => {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    const cardContent = document.createElement('div');
-                    cardContent.className = 'card-content';
-                    
-                    const cardTitle = document.createElement('h2');
-                    cardTitle.className = 'card-title';
-                    cardTitle.textContent = item.variable1; // Assign VARIABLE1
-                    
-                    const cardText = document.createElement('p');
-                    cardText.className = 'card-text';
-                    cardText.textContent = item.variable2; // Assign VARIABLE2
-                    
-                    const cardAction = document.createElement('div');
-                    cardAction.className = 'card-action';
-                    
-                    const button = document.createElement('button');
-                    button.textContent = 'Learn More';
-                    
-                    cardAction.appendChild(button);
-                    cardContent.appendChild(cardTitle);
-                    cardContent.appendChild(cardText);
-                    cardContent.appendChild(cardAction);
-                    card.appendChild(cardContent);
-                    container.appendChild(card);
-                });
-            
+                const card = document.createElement('div');
+        
+                card.className = 'card'; // SAME
+                
+                const cardContent = document.createElement('div');
+                cardContent.className = 'card-content'; // SAME
+                
+                const cardTitle = document.createElement('h2');
+                cardTitle.className = 'card-title';
+                cardTitle.textContent = userData.Title; // Assign TITLE
+                
+                const cardText = document.createElement('p');
+                cardText.className = 'card-text';
+                cardText.textContent = userData.Desc1; // Assign TEXT
+                
+                const cardAction = document.createElement('div');
+                cardAction.className = 'card-action';
+                
+                const button = document.createElement('button');
+                button.textContent = 'Learn More';
+                
+                cardAction.appendChild(button);
+                cardContent.appendChild(cardTitle);
+                cardContent.appendChild(cardText);
+                cardContent.appendChild(cardAction);
+                card.appendChild(cardContent);
+                container.appendChild(card);
+
+
+            } else {
+                console.log("No such document!");
+            }
         }
 
         </script>

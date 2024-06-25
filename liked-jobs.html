@@ -7,24 +7,163 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <style>
+            body, html {
+                margin: 0;
+                padding: 0;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background: #ffffff;
+                color: #333333;
+                overflow-x: hidden;
+            }
+    
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                padding: 40px;
+                gap: 40px;
+                animation: fadeIn 1.5s ease-in-out;
+            }
+    
+            .card {
+                background: #ffffff;
+                border-radius: 15px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                transform: scale(0.9);
+                transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out;
+                width: calc(33.33% - 40px);
+                min-width: 250px;
+                max-width: 300px;
+                height: 450px;
+                display: flex;
+                flex-direction: column;
+            }
+    
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+            }
+    
+            .card-content {
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 100%;
+            }
+    
+            .card-title {
+                font-size: 1.75em;
+                margin: 0;
+                color: #333333;
+            }
+    
+            .card-text {
+                flex: 1;
+                margin-top: 10px;
+                font-size: 1em;
+                color: #666666;
+            }
+    
+            .card-action {
+                display: flex;
+                justify-content: flex-end;
+            }
+    
+            .card-action button {
+                padding: 10px 20px;
+                background: #007bff;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background 0.3s ease-in-out;
+            }
+    
+            .card-action button:hover {
+                background: #0056b3;
+            }
+    
+            @keyframes fadeIn {
+                0% { opacity: 0; transform: translateY(50px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+    
+            .container {
+                animation: fadeIn 1.5s ease-in-out;
+            }
+    
+            @media (max-width: 1200px) {
+                .card {
+                    width: calc(50% - 40px);
+                }
+            }
+    
+            @media (max-width: 768px) {
+                .card {
+                    width: calc(100% - 40px);
+                }
+            }
+        </style>
     </head>
     <body>
-        <div>
-            Hello
+        <div class="container">
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Card Title 1</h2>
+                    <p class="card-text">This is some example text to fill the card content.</p>
+                    <div class="card-action">
+                        <button>Learn More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Card Title 2</h2>
+                    <p class="card-text">This is some example text to fill the card content.</p>
+                    <div class="card-action">
+                        <button>Learn More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Card Title 2</h2>
+                    <p class="card-text">This is some example text to fill the card content.</p>
+                    <div class="card-action">
+                        <button>Learn More</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-content">
+                    <h2 class="card-title">Card Title 2</h2>
+                    <p class="card-text">This is some example text to fill the card content.</p>
+                    <div class="card-action">
+                        <button>Learn More</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more cards as needed -->
         </div>
         <script type="module">
             import { mainList } from "./script.js";
             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
             import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-            import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+            import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
             import { firebaseConfig } from "./firebase-config.js";
-
+            var userr = "";
             const firebaseApp = initializeApp(firebaseConfig);
             const auth = getAuth(firebaseApp);
             const firestore = getFirestore(firebaseApp);
-
+            const matchedItems = [];
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
+                    userr = user
                     const userDocRef = doc(firestore, `users/${user.uid}`);
                     const userDocSnap = await getDoc(userDocRef);
 
@@ -32,7 +171,7 @@
                         const userData = userDocSnap.data();
                         const indexLiked = userData.indexLiked || [];
 
-                        const matchedItems = mainList.filter(item => indexLiked.includes(item.code));
+                        matchedItems = mainList.filter(item => indexLiked.includes(item.id));
                         console.log(matchedItems);
                     } else {
                         console.log("No such document!");
@@ -41,6 +180,40 @@
                     console.log("No user is signed in.");
                 }
             });
+
+            if (matchedItems != null) {
+                const container = document.getElementById("container");
+                matchedItems.forEach(() => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    
+                    const cardContent = document.createElement('div');
+                    cardContent.className = 'card-content';
+                    
+                    const cardTitle = document.createElement('h2');
+                    cardTitle.className = 'card-title';
+                    cardTitle.textContent = item.variable1; // Assign VARIABLE1
+                    
+                    const cardText = document.createElement('p');
+                    cardText.className = 'card-text';
+                    cardText.textContent = item.variable2; // Assign VARIABLE2
+                    
+                    const cardAction = document.createElement('div');
+                    cardAction.className = 'card-action';
+                    
+                    const button = document.createElement('button');
+                    button.textContent = 'Learn More';
+                    
+                    cardAction.appendChild(button);
+                    cardContent.appendChild(cardTitle);
+                    cardContent.appendChild(cardText);
+                    cardContent.appendChild(cardAction);
+                    card.appendChild(cardContent);
+                    container.appendChild(card);
+                });
+            
+        }
+
         </script>
     </body>
 </html>

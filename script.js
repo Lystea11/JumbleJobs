@@ -135,14 +135,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (event) => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;
-        const maxPercentage = 25; // Maximum percentage relative to half the screen width
+        const maxPercentage = 25; // Maximum percentage of the screen width
     
         if (mouseX < middleX) {
-            const percentage = Math.min((1 - (mouseX / middleX)) * 100, maxPercentage);
+            const percentage = (1 - (mouseX / window.innerWidth)) * maxPercentage;
             semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
             semiCircleRight.style.clipPath = `ellipse(0% 50% at 100% 50%)`;
         } else {
-            const percentage = Math.min(((mouseX - middleX) / middleX) * 100, maxPercentage);
+            const percentage = ((mouseX / window.innerWidth) - 0.5) * 2 * maxPercentage;
             semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
             semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
         }

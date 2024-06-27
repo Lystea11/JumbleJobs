@@ -166,12 +166,12 @@ body, html {
 
 .semi-circle.left {
   left: 0;
-  clip-path: ellipse(10% 50% at 0% 50%);
+  clip-path: ellipse(0% 50% at 0% 50%);
   background-color: red;
 }
 
 .semi-circle.right {
   right: 0;
-  clip-path: ellipse(10% 50% at 100% 50%);
+  clip-path: ellipse(0% 50% at 100% 50%);
   background-color: green;
 }

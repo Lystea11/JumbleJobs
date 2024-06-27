@@ -139,11 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (mouseX < middleX) {
             const percentage = (1 - (mouseX / middleX)) * 100;
             semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
-            semiCircleRight.style.clipPath = `ellipse(0% 50% at 100% 50%)`;
+            semiCircleRight.style.clipPath = `ellipse(1% 50% at 100% 50%)`;
         } else {
             const percentage = ((mouseX - middleX) / middleX) * 100;
             semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
-            semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
+            semiCircleLeft.style.clipPath = `ellipse(1% 50% at 0% 50%)`;
         }
     });
 

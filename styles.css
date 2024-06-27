@@ -161,17 +161,17 @@ body, html {
   bottom: 0;
   width: 50%;
   background-color: transparent;
-  transition: clip-path 0.3s ease;
+  transition: clip-path 0.1s ease;
 }
 
 .semi-circle.left {
   left: 0;
   clip-path: ellipse(0% 50% at 0% 50%);
-  background-color: red;
+  background-color: #ad252d;
 }
 
 .semi-circle.right {
   right: 0;
   clip-path: ellipse(0% 50% at 100% 50%);
-  background-color: green;
+  background-color: #A9BE70;
 }

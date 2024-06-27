@@ -5,6 +5,7 @@ body, html {
   height: 100%;
   width: 100%;
   background-color: #f0f0f0;
+  position: relative;
 }
 
 .container {
@@ -77,5 +78,35 @@ body, html {
 
 .indicator.right {
   right: 10%;
+  background-color: green;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.semi-circle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-color: transparent;
+  clip-path: ellipse(0% 50% at 100% 50%);
+  transition: clip-path 0.3s ease;
+}
+
+.semi-circle.left {
+  left: 0;
+  background-color: red;
+}
+
+.semi-circle.right {
+  right: 0;
   background-color: green;
 }

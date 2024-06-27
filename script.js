@@ -43,8 +43,8 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
-const indicatorLeft = document.querySelector('.indicator.left');
-const indicatorRight = document.querySelector('.indicator.right');
+const semiCircleLeft = document.querySelector('.semi-circle.left');
+const semiCircleRight = document.querySelector('.semi-circle.right');
 
 let currentUser = null;
 
@@ -102,9 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveNext() {
         if (currentCardIndex < cards.length - 1) {
             cards[currentCardIndex].classList.add('exit-right');
-            indicatorRight.style.display = 'flex';
             setTimeout(() => {
-                indicatorRight.style.display = 'none';
                 currentCardIndex++;
                 updateCards();
             }, 600); // Match the transition duration
@@ -114,9 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function movePrev() {
         if (currentCardIndex < cards.length - 1) {
             cards[currentCardIndex].classList.add('exit-left');
-            indicatorLeft.style.display = 'flex';
             setTimeout(() => {
-                indicatorLeft.style.display = 'none';
                 currentCardIndex++;
                 updateCards();
             }, 600); // Match the transition duration
@@ -134,6 +130,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             isAnimating = false;
         }, 600); // Match the transition duration
+    });
+
+    document.addEventListener('mousemove', (event) => {
+        const middleX = window.innerWidth / 2;
+        const mouseX = event.clientX;
+
+        if (mouseX < middleX) {
+            const percentage = (1 - (mouseX / middleX)) * 100;
+            semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
+            semiCircleRight.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
+        } else {
+            const percentage = ((mouseX - middleX) / middleX) * 100;
+            semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
+            semiCircleLeft.style.clipPath = `ellipse(0% 50% at 100% 50%)`;
+        }
     });
 
     updateCards();

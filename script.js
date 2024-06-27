@@ -43,6 +43,9 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 const db = getFirestore(firebaseApp);
 
+const indicatorLeft = document.querySelector('.indicator.left');
+const indicatorRight = document.querySelector('.indicator.right');
+
 let currentUser = null;
 
 // Listen for authentication state changes
@@ -86,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cards = Array.from(document.querySelectorAll('.card'));
 
+
     function updateCards() {
         cards.forEach((card, index) => {
             card.classList.remove('active', 'exit-left', 'exit-right');
@@ -98,11 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveNext() {
         if (currentCardIndex < cards.length - 1) {
             cards[currentCardIndex].classList.add('exit-right');
+            indicatorRight.style.display = 'flex';
             setTimeout(() => {
+                indicatorRight.style.display = 'none';
                 currentCardIndex++;
-                console.log("went right");
                 updateCards();
-                updateUserIndexLiked('add', currentCardIndex);
             }, 600); // Match the transition duration
         }
     }
@@ -110,11 +114,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function movePrev() {
         if (currentCardIndex < cards.length - 1) {
             cards[currentCardIndex].classList.add('exit-left');
+            indicatorLeft.style.display = 'flex';
             setTimeout(() => {
+                indicatorLeft.style.display = 'none';
                 currentCardIndex++;
-                console.log("went left");
                 updateCards();
-                updateUserIndexLiked('remove', currentCardIndex);
             }, 600); // Match the transition duration
         }
     }

@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
     const semiCircleLeft = document.querySelector('.semi-circle.left');
     const semiCircleRight = document.querySelector('.semi-circle.right');
-    const bufferPercentage = 0.25;
+    const bufferPercentage = 0.45;
     let isAnimating = false;
     let currentCardIndex = 0;
 

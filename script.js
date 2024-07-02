@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
     const semiCircleLeft = document.querySelector('.semi-circle.left');
     const semiCircleRight = document.querySelector('.semi-circle.right');
-    const bufferPercentage = 0.45;
+    const bufferPercentage = 0.25;
     let isAnimating = false;
     let currentCardIndex = 0;
 
@@ -158,8 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const bufferRight = middleX * (1 + bufferPercentage);
 
         if (mouseX < bufferLeft) {
+            semiCircleLeft.classList.add('animate-left');
+            setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
             movePrev();
         } else if (mouseX > bufferRight) {
+            semiCircleRight.classList.add('animate-right');
+            setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
             moveNext();
         }
     });

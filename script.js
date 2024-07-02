@@ -151,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!inLeftBuffer && mouseX < bufferLeft) {
                 semiCircleLeft.classList.add('animate-left');
-                setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
                 inLeftBuffer = true;
             } else if (mouseX >= bufferLeft) {
                 inLeftBuffer = false;
@@ -163,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!inRightBuffer && mouseX > bufferRight) {
                 semiCircleRight.classList.add('animate-right');
-                setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
                 inRightBuffer = true;
             } else if (mouseX <= bufferRight) {
                 inRightBuffer = false;

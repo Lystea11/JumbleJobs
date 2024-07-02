@@ -173,12 +173,22 @@ body, html {
   background-color: #A9BE70;
 }
 
+@keyframes pulse-left {
+  0%, 100% { transform: scale(1); background-color: rgba(173, 37, 45, 0.8); box-shadow: 0 0 0 rgba(173, 37, 45, 0.4); }
+  50% { transform: scale(1.05) skew(-2deg); background-color: rgba(223, 87, 95, 0.9); box-shadow: 0 0 20px rgba(173, 37, 45, 0.6); }
+}
+
+@keyframes pulse-right {
+  0%, 100% { transform: scale(1); background-color: rgba(169, 190, 112, 0.8); box-shadow: 0 0 0 rgba(169, 190, 112, 0.4); }
+  50% { transform: scale(1.05) skew(2deg); background-color: rgba(219, 240, 162, 0.9); box-shadow: 0 0 20px rgba(169, 190, 112, 0.6); }
+}
+
 .semi-circle.animate-left {
-  transform: scale(1.05);
-  background-color: rgba(173, 37, 45, 0.8);
+  animation: pulse-left 0.6s ease-in-out;
+  transition: clip-path 0.3s ease-out;
 }
 
 .semi-circle.animate-right {
-  transform: scale(1.05);
-  background-color: rgba(169, 190, 112, 0.8);
+  animation: pulse-right 0.6s ease-in-out;
+  transition: clip-path 0.3s ease-out;
 }

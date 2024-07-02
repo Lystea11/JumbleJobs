@@ -121,6 +121,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 600); // Match the transition duration
         }
     }
+    
+    document.addEventListener('mousedown', (event) => {
+        const middleX = window.innerWidth / 2;
+        const mouseX = event.clientX;
+        const bufferLeft = middleX * (1 - bufferPercentage);
+        const bufferRight = middleX * (1 + bufferPercentage);
+
+        if (mouseX < bufferLeft) {
+            semiCircleLeft.classList.add('animate-left');
+            setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
+            movePrev();
+        } else if (mouseX > bufferRight) {
+            semiCircleRight.classList.add('animate-right');
+            setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
+            moveNext();
+        }
+    });
 
     document.addEventListener('keydown', (event) => {
         if (isAnimating) return;
@@ -138,6 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (event) => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;
+        const bufferLeft = middleX * (1 - bufferPercentage);
+        const bufferRight = middleX * (1 + bufferPercentage);
+
+        if (mouseX < bufferLeft) {
+            semiCircleLeft.classList.add('animate-left');
+            setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
+        } else if (mouseX > bufferRight) {
+            semiCircleRight.classList.add('animate-right');
+            setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
+        }
         const maxPercentage = 25; // Maximum percentage of the screen width
 
         if (mouseX < middleX) {
@@ -151,22 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    document.addEventListener('mousedown', (event) => {
-        const middleX = window.innerWidth / 2;
-        const mouseX = event.clientX;
-        const bufferLeft = middleX * (1 - bufferPercentage);
-        const bufferRight = middleX * (1 + bufferPercentage);
 
-        if (mouseX < bufferLeft) {
-            semiCircleLeft.classList.add('animate-left');
-            setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
-            movePrev();
-        } else if (mouseX > bufferRight) {
-            semiCircleRight.classList.add('animate-right');
-            setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
-            moveNext();
-        }
-    });
 
     updateCards();
 });
@@ -185,9 +197,6 @@ const loadSplineScene = async (canvasId, url) => {
         } 
     });
 };
-visualViewport.addEventListener("resize", () => {
-    location.reload();
-  });
 
 const LogOverlay = document.getElementById("overlay1");
 document.addEventListener("mousedown", handler, true);

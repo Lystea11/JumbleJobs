@@ -12,40 +12,19 @@
   <div class="overlay">
     <div class="semi-circle left"></div>
     <div class="semi-circle right"></div>
-</div>
-  <div class="card">
-    <canvas id="canvas0"></canvas>
   </div>
-  <div class="card">
-    <canvas id="canvas1"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas2"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas3"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas4"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas5"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas6"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas7"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas8"></canvas>
-  </div>
-  <div class="card">
-    <canvas id="canvas9"></canvas>
-  </div>
+  <div class="card" id="card0"><canvas id="canvas0"></canvas></div>
+  <div class="card" id="card1"><canvas id="canvas1"></canvas></div>
+  <div class="card" id="card2"><canvas id="canvas2"></canvas></div>
+  <div class="card" id="card3"><canvas id="canvas3"></canvas></div>
+  <div class="card" id="card4"><canvas id="canvas4"></canvas></div>
+  <div class="card" id="card5"><canvas id="canvas5"></canvas></div>
+  <div class="card" id="card6"><canvas id="canvas6"></canvas></div>
+  <div class="card" id="card7"><canvas id="canvas7"></canvas></div>
+  <div class="card" id="card8"><canvas id="canvas8"></canvas></div>
+  <div class="card" id="card9"><canvas id="canvas9"></canvas></div>
 </div>
 
-<!-- Account info circle and menu -->
 <div class="account-info" id="accountInfo">AI</div>
 <div class="account-menu" id="accountMenu">
   <a href="#" id="likedJobs">Liked Jobs</a>
@@ -66,14 +45,11 @@
   import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   import { firebaseConfig } from "./firebase-config.js";
 
-  // Initialize Firebase
   const firebaseApp = initializeApp(firebaseConfig);
   const auth = getAuth(firebaseApp);
   const firestore = getFirestore(firebaseApp);
 
-  // Set persistence to local
   setPersistence(auth, browserLocalPersistence).then(() => {
-    // DOM elements
     const accountInfo = document.getElementById('accountInfo');
     const accountMenu = document.getElementById('accountMenu');
     const likedJobs = document.getElementById('likedJobs');
@@ -82,26 +58,20 @@
     const overlay = document.getElementById('overlay1');
     const segueToLogin = document.getElementById('segueToLogin');
 
-    // Toggle account menu
     accountInfo.addEventListener('click', () => {
       accountMenu.style.display = accountMenu.style.display === 'block' ? 'none' : 'block';
     });
 
-    // Add functionality to menu items
     likedJobs.addEventListener('click', () => {
-      // Redirect to liked jobs page
       window.location.href = 'liked-jobs.html';
     });
 
     accountInfoMenu.addEventListener('click', () => {
-      // Redirect to account info page
       window.location.href = 'account-info.html';
     });
 
-    // Authentication action (login/logout)
     authAction.addEventListener('click', () => {
       if (auth.currentUser) {
-        // User is signed in, perform sign out
         signOut(auth).then(() => {
           alert('Signed out successfully!');
           window.location.href = 'index.html';
@@ -110,15 +80,12 @@
           alert('Sign-out failed. Please try again.');
         });
       } else {
-        // User is signed out, redirect to login page
         window.location.href = 'login.html';
       }
     });
 
-    // Listen for authentication state changes
     auth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in, fetch user data from Firestore
         const userRef = doc(firestore, 'users', user.uid);
         getDoc(userRef).then((docSnap) => {
           if (docSnap.exists()) {
@@ -126,7 +93,7 @@
             accountInfo.style.backgroundImage = `url(${userData.photoURL})`;
             accountInfo.textContent = '';
             authAction.textContent = 'Log Out';
-            overlay.style.display = 'none'; // Hide overlay if logged in
+            overlay.style.display = 'none';
           } else {
             console.log('No such document!');
           }
@@ -134,30 +101,25 @@
           console.log('Error getting document:', error);
         });
       } else {
-        // User is signed out, show overlay
         accountInfo.style.backgroundImage = '';
         accountInfo.textContent = 'AI';
         authAction.textContent = 'Log In';
-        overlay.style.display = 'flex'; // Show overlay if logged out
+        overlay.style.display = 'flex';
       }
     });
 
-    // Close menu if clicked outside
     window.addEventListener('click', (event) => {
       if (!accountInfo.contains(event.target) && !accountMenu.contains(event.target)) {
         accountMenu.style.display = 'none';
       }
     });
 
-    // Redirect to login page on segue button click
     segueToLogin.addEventListener('click', () => {
       window.location.href = 'login.html';
     });
   }).catch((error) => {
     console.error('Error setting persistence: ', error);
   });
-
-
 </script>
 <script type="module" src="script.js"></script>
 </body>

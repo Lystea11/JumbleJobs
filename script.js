@@ -86,9 +86,12 @@ async function updateUserIndexLiked(operation, index) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
     const cards = Array.from(document.querySelectorAll('.card'));
-
+    const semiCircleLeft = document.querySelector('.semi-circle.left');
+    const semiCircleRight = document.querySelector('.semi-circle.right');
+    const bufferPercentage = 0.25;
+    let isAnimating = false;
+    let currentCardIndex = 0;
 
     function updateCards() {
         cards.forEach((card, index) => {
@@ -110,10 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function movePrev() {
-        if (currentCardIndex < cards.length - 1) {
+        if (currentCardIndex > 0) {
             cards[currentCardIndex].classList.add('exit-left');
             setTimeout(() => {
-                currentCardIndex++;
+                currentCardIndex--;
                 updateCards();
             }, 600); // Match the transition duration
         }
@@ -136,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;
         const maxPercentage = 25; // Maximum percentage of the screen width
-    
+
         if (mouseX < middleX) {
             const percentage = (1 - (mouseX / window.innerWidth)) * maxPercentage;
             semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
@@ -145,6 +148,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const percentage = ((mouseX / window.innerWidth) - 0.5) * 2 * maxPercentage;
             semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
             semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
+        }
+    });
+
+    document.addEventListener('mousedown', (event) => {
+        const middleX = window.innerWidth / 2;
+        const mouseX = event.clientX;
+        const bufferLeft = middleX * (1 - bufferPercentage);
+        const bufferRight = middleX * (1 + bufferPercentage);
+
+        if (mouseX < bufferLeft) {
+            movePrev();
+        } else if (mouseX > bufferRight) {
+            moveNext();
         }
     });
 

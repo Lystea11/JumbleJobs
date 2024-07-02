@@ -92,6 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const bufferPercentage = 0.25;
     let isAnimating = false;
     let currentCardIndex = 0;
+    let inLeftBuffer = false;
+    let inRightBuffer = false;
 
     function updateCards() {
         cards.forEach((card, index) => {
@@ -121,23 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 600); // Match the transition duration
         }
     }
-    
-    document.addEventListener('mousedown', (event) => {
-        const middleX = window.innerWidth / 2;
-        const mouseX = event.clientX;
-        const bufferLeft = middleX * (1 - bufferPercentage);
-        const bufferRight = middleX * (1 + bufferPercentage);
-
-        if (mouseX < bufferLeft) {
-            semiCircleLeft.classList.add('animate-left');
-            setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
-            movePrev();
-        } else if (mouseX > bufferRight) {
-            semiCircleRight.classList.add('animate-right');
-            setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
-            moveNext();
-        }
-    });
 
     document.addEventListener('keydown', (event) => {
         if (isAnimating) return;
@@ -157,28 +142,34 @@ document.addEventListener('DOMContentLoaded', () => {
         const mouseX = event.clientX;
         const bufferLeft = middleX * (1 - bufferPercentage);
         const bufferRight = middleX * (1 + bufferPercentage);
-
-        if (mouseX < bufferLeft) {
-            semiCircleLeft.classList.add('animate-left');
-            setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
-        } else if (mouseX > bufferRight) {
-            semiCircleRight.classList.add('animate-right');
-            setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
-        }
         const maxPercentage = 25; // Maximum percentage of the screen width
 
         if (mouseX < middleX) {
             const percentage = (1 - (mouseX / window.innerWidth)) * maxPercentage;
             semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
             semiCircleRight.style.clipPath = `ellipse(0% 50% at 100% 50%)`;
+
+            if (!inLeftBuffer && mouseX < bufferLeft) {
+                semiCircleLeft.classList.add('animate-left');
+                setTimeout(() => semiCircleLeft.classList.remove('animate-left'), 400);
+                inLeftBuffer = true;
+            } else if (mouseX >= bufferLeft) {
+                inLeftBuffer = false;
+            }
         } else {
             const percentage = ((mouseX / window.innerWidth) - 0.5) * 2 * maxPercentage;
             semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
             semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
+
+            if (!inRightBuffer && mouseX > bufferRight) {
+                semiCircleRight.classList.add('animate-right');
+                setTimeout(() => semiCircleRight.classList.remove('animate-right'), 400);
+                inRightBuffer = true;
+            } else if (mouseX <= bufferRight) {
+                inRightBuffer = false;
+            }
         }
     });
-
-
 
     updateCards();
 });

@@ -181,7 +181,19 @@ const loadSplineScene = async (canvasId, url) => {
         } 
     });
 };
+visualViewport.addEventListener("resize", () => {
+    location.reload();
+  });
 
+const LogOverlay = document.getElementById("overlay1");
+document.addEventListener("mousedown", handler, true);
+    
+function handler(e) { // DISABLE CLICKS IF OVERLAY
+    if(LogOverlay.style.display != "none") {
+        e.stopPropagation();
+        e.preventDefault();
+    }
+}
 
 sortedList.forEach((element, index) => {
     console.log(index);

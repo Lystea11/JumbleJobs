@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateUserIndexLiked("remove", currentCardIndex+1);
             cards[currentCardIndex].classList.add('exit-left');
             setTimeout(() => {
-                currentCardIndex--;
+                currentCardIndex++;
                 updateCards();
             }, 600); // Match the transition duration
         }

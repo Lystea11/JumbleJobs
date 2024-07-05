@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function movePrev() {
-        if (currentCardIndex > 0) {
+        if (currentCardIndex >= 0) {
             updateUserIndexLiked("remove", currentCardIndex+1);
             cards[currentCardIndex].classList.add('exit-left');
             setTimeout(() => {

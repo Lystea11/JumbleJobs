@@ -165,13 +165,13 @@ body, html {
 .semi-circle.left {
   left: 0;
   clip-path: ellipse(0% 50% at 0% 50%);
-  background-color: rgba(173, 37, 45, 0.3);
+  background-color: rgb(145, 38, 45);
 }
 
 .semi-circle.right {
   right: 0;
   clip-path: ellipse(0% 50% at 100% 50%);
-  background-color: rgba(169, 190, 112, 0.3);
+  background-color: rgb(94, 118, 30);
 }
 
 .semi-circle::after {

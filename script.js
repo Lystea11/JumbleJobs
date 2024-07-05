@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 1000); // Match the animation duration of Magic CSS Animations
+            }, 900); // Match the animation duration of Magic CSS Animations
         }
     }
     
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 1000); // Match the animation duration of Magic CSS Animations
+            }, 900); // Match the animation duration of Magic CSS Animations
         }
     }
 

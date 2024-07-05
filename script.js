@@ -66,7 +66,7 @@ async function updateUserIndexLiked(operation, index) {
     const code = codeMap.get(index);
 
     if (!code) {
-        console.error("ID not found in the array");
+        console.error("ID not found in the array, id = " + index);
         return;
     }
 

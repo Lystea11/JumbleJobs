@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCards() {
         cards.forEach((card, index) => {
-            card.classList.remove('active', 'exit-left', 'exit-right');
+            card.classList.remove('active', 'exit-left', 'exit-right', 'tinRightOut', 'tinLeftOut');
             if (index === currentCardIndex) {
                 card.classList.add('active');
             }
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function moveNext() {
         if (currentCardIndex < cards.length - 1) {
             updateUserIndexLiked("add", currentCardIndex+1);
-            cards[currentCardIndex].classList.add('exit-right');
+            cards[currentCardIndex].classList.add('tinRightOut');
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function movePrev() {
         if (currentCardIndex >= 0) {
             updateUserIndexLiked("remove", currentCardIndex+1);
-            cards[currentCardIndex].classList.add('exit-left');
+            cards[currentCardIndex].classList.add('tinLeftOut');
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();

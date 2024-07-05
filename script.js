@@ -193,7 +193,7 @@ const LogOverlay = document.getElementById("overlay1");
 document.addEventListener("mousedown", handler, true);
     
 function handler(e) { // DISABLE CLICKS IF OVERLAY
-    if(LogOverlay.style.display != "none") {
+    if(LogOverlay.style.display == "none") {
         e.stopPropagation();
         e.preventDefault();
     }

@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cards.forEach((card, index) => {
             card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'puffIn');
             if (index === currentCardIndex) {
-                card.classList.add('active', 'magictime', 'puffIn');
+                card.classList.add('active', 'magictime', 'spaceInUp');
             }
         });
     }

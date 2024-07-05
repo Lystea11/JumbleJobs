@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.8.8/build/runtime.min.js';
+var HasUserLoaded = false;
 
 function shuffle(array) {
     let currentIndex = array.length;
@@ -52,6 +53,7 @@ let currentUser = null;
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUser = user;
+        HasUserLoaded = true;
     } else {
         currentUser = null;
     }
@@ -86,6 +88,11 @@ async function updateUserIndexLiked(operation, index) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const checkLoginStatus = setInterval(() => {
+        if (HasUserLoaded) {
+            clearInterval(checkLoginStatus);
+
+
     const cards = Array.from(document.querySelectorAll('.card'));
     const semiCircleLeft = document.querySelector('.semi-circle.left');
     const semiCircleRight = document.querySelector('.semi-circle.right');
@@ -169,6 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     updateCards();
+    }
+    }, 500); // Check every 500 milliseconds (1/2 second)
 });
 
 const loadSplineScene = async (canvasId, url) => {

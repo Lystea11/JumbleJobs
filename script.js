@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCards() {
         cards.forEach((card, index) => {
-            card.classList.remove('active', 'exit-left', 'exit-right', 'tinRightOut', 'tinLeftOut');
+            card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut');
             if (index === currentCardIndex) {
                 card.classList.add('active');
             }
@@ -106,23 +106,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function moveNext() {
         if (currentCardIndex < cards.length - 1) {
-            updateUserIndexLiked("add", currentCardIndex+1);
-            cards[currentCardIndex].classList.add('tinRightOut');
+            updateUserIndexLiked("add", currentCardIndex + 1);
+            cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 1200); // Match the transition duration
+            }, 1000); // Match the animation duration of Magic CSS Animations
         }
     }
-
+    
     function movePrev() {
         if (currentCardIndex >= 0) {
-            updateUserIndexLiked("remove", currentCardIndex+1);
-            cards[currentCardIndex].classList.add('tinLeftOut');
+            updateUserIndexLiked("remove", currentCardIndex + 1);
+            cards[currentCardIndex].classList.add('magictime', 'tinLeftOut');
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 1200); // Match the transition duration
+            }, 1000); // Match the animation duration of Magic CSS Animations
         }
     }
 

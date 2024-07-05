@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 600); // Match the transition duration
+            }, 1200); // Match the transition duration
         }
     }
 
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 600); // Match the transition duration
+            }, 1200); // Match the transition duration
         }
     }
 

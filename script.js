@@ -142,34 +142,31 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('mousemove', (event) => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;
-        const bufferLeft = middleX * (1 - bufferPercentage);
-        const bufferRight = middleX * (1 + bufferPercentage);
         const maxPercentage = 25; // Maximum percentage of the screen width
-
+    
         if (mouseX < middleX) {
             const percentage = (1 - (mouseX / window.innerWidth)) * maxPercentage;
             semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
             semiCircleRight.style.clipPath = `ellipse(0% 50% at 100% 50%)`;
-
-            if (!inLeftBuffer && mouseX < bufferLeft) {
-                semiCircleLeft.classList.add('animate-left');
-                inLeftBuffer = true;
-            } else if (mouseX >= bufferLeft) {
-                inLeftBuffer = false;
-            }
         } else {
             const percentage = ((mouseX / window.innerWidth) - 0.5) * 2 * maxPercentage;
             semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
             semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
-
-            if (!inRightBuffer && mouseX > bufferRight) {
-                semiCircleRight.classList.add('animate-right');
-                inRightBuffer = true;
-            } else if (mouseX <= bufferRight) {
-                inRightBuffer = false;
-            }
         }
     });
+    document.addEventListener('mousedown', (event) => {
+        const middleX = window.innerWidth / 2;
+        const mouseX = event.clientX;
+        const bufferLeft = middleX * (1 - bufferPercentage);
+        const bufferRight = middleX * (1 + bufferPercentage);
+
+        if (mouseX < bufferLeft) {
+            movePrev();
+        } else if (mouseX > bufferRight) {
+            moveNext();
+        }
+    });
+
 
     updateCards();
 });
@@ -190,14 +187,6 @@ const loadSplineScene = async (canvasId, url) => {
 };
 
 const LogOverlay = document.getElementById("overlay1");
-document.addEventListener("mousedown", handler, true);
-    
-function handler(e) { // DISABLE CLICKS IF OVERLAY
-    if(LogOverlay.style.display == "none") {
-        e.stopPropagation();
-        e.preventDefault();
-    }
-}
 
 sortedList.forEach((element, index) => {
     console.log(index);

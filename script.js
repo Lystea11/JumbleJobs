@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCards() {
         cards.forEach((card, index) => {
-            card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'puffIn');
+            card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'spaceInUp');
             if (index === currentCardIndex) {
                 card.classList.add('active', 'magictime', 'spaceInUp');
             }

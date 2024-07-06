@@ -5,7 +5,7 @@ import { firebaseConfig } from "./firebase-config.js";
 import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.8.8/build/runtime.min.js';
 var HasUserLoaded = false;
 
-function shuffle(array) {
+function shuffle(array) { // shuffling 
     let currentIndex = array.length;
   
     // While there remain elements to shuffle...
@@ -21,16 +21,16 @@ function shuffle(array) {
     }
   }
 
-export const mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":7,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":8,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":9,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}, 
-    {"id":10,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode"}];
+export const mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":7,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":8,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":9,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":10,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}]; // Change or Add new spline code and Website link + twitter here DO NOT CHANGE ID
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);
@@ -187,10 +187,12 @@ const loadSplineScene = async (canvasId, url) => {
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
+        var www = mainList[currentCardIndex+1].www;
+        var twitt = mainList[currentCardIndex+1].twitter;
         if (WWWPress) {
-            window.location.href = "http://www.w3schools.com";
+            window.location.href = www;
         } else if (LinkPress) {
-            window.location.href = "http://www.apple.com";
+            window.location.href = twitt;
         } 
     });
 };

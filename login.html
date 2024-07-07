@@ -58,7 +58,6 @@
                 });
               } else {
                 console.log('User already exists in Firestore');
-                window.location.href("index.html");
               }
             }).catch((error) => {
               console.error('Error getting user document: ', error);
@@ -93,6 +92,7 @@
         if (user) {
           // User is signed in
           console.log('User is signed in: ', user);
+          window.location.href("index.html");
           btnLogin.style.display = 'none';
           btnLogout.style.display = 'block';
 

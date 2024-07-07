@@ -156,6 +156,17 @@
             const auth = getAuth(firebaseApp);
             const firestore = getFirestore(firebaseApp);
             var matchedItems = [];
+
+            enableIndexedDbPersistence(firestore, { synchronizeTabs: true })
+    .catch((err) => {
+        if (err.code == 'failed-precondition') {
+            console.error("Multiple tabs open, persistence can only be enabled in one tab at a time.");
+        } else if (err.code == 'unimplemented') {
+            console.error("The current browser does not support all of the features required to enable persistence.");
+        }
+    });
+
+
             onAuthStateChanged(auth, async (user) => {
                 if (user) {
                     userr = user;

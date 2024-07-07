@@ -24,7 +24,14 @@
     const firebaseApp = initializeApp(firebaseConfig);
     const auth = getAuth(firebaseApp);
     const firestore = getFirestore(firebaseApp);
-
+    enableIndexedDbPersistence(firestore, { synchronizeTabs: true })
+    .catch((err) => {
+        if (err.code == 'failed-precondition') {
+            console.error("Multiple tabs open, persistence can only be enabled in one tab at a time.");
+        } else if (err.code == 'unimplemented') {
+            console.error("The current browser does not support all of the features required to enable persistence.");
+        }
+    });
     // Set persistence to local
     setPersistence(auth, browserLocalPersistence).then(() => {
       // DOM elements
@@ -92,7 +99,7 @@
         if (user) {
           // User is signed in
           console.log('User is signed in: ', user);
-          window.location.href("index.html");
+          window.location.assign("index.html")
           btnLogin.style.display = 'none';
           btnLogout.style.display = 'block';
 

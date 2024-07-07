@@ -39,6 +39,7 @@
             // User signed in successfully
             console.log(result.user);
             alert('Signed in successfully!');
+            window.location.href("index.html");
             
             // Check if user exists in Firestore, and if not, create a new document
             const userRef = doc(firestore, 'users', result.user.uid);

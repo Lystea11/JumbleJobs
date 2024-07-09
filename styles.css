@@ -226,13 +226,13 @@ body, html {
 .semi-circle.left {
   left: 0;
   clip-path: ellipse(0% 50% at 0% 50%);
-  background-color: rgba(145, 38, 45, 0.496);
+  background-color: rgba(145, 38, 45, 0.681);
 }
 
 .semi-circle.right {
   right: 0;
   clip-path: ellipse(0% 50% at 100% 50%);
-  background-color: rgba(95, 118, 30, 0.499);
+  background-color: rgba(132, 162, 48, 0.742);
 }
 
 .semi-circle::after {

@@ -33,13 +33,13 @@ body, html {
 
 #notificationButton {
   background-image: url('notifIcon.png');
-  background-size: cover;
+  background-size:cover;
   animation: fadeIn 2s;
 }
 
 #chatButton {
   background-image: url('chatIcon.png');
-  background-size: cover;
+  background-size: auto;
   animation: fadeIn 2s;
 }
 

@@ -32,6 +32,14 @@ body, html {
   background-position: center;
 }
 
+#notificationButton {
+  background-image: url('notifIcon.png');
+}
+
+#chatButton {
+  background-image: url('chatIcon.png');
+}
+
 .account-menu, .notification-menu {
   display: none;
   position: fixed;
@@ -45,12 +53,7 @@ body, html {
   transition: all 0.3s ease;
 }
 
-.accountInfo {
-  background-image: url(./notifIcon.png);
-}
-.chatButton {
-  background-image: url(./chatIcon.png);
-}
+
 
 .account-menu a, .notification-menu a {
   display: block;

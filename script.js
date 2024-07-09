@@ -3,6 +3,7 @@ import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
 import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.8.8/build/runtime.min.js';
+import { mainList } from "./data.js";
 var HasUserLoaded = false;
 
 function shuffle(array) { // shuffling 
@@ -21,16 +22,7 @@ function shuffle(array) { // shuffling
     }
   }
 
-export const mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":2,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":7,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":8,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":9,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
-    {"id":10,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}]; // Change or Add new spline code and Website link + twitter here DO NOT CHANGE ID
+
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);

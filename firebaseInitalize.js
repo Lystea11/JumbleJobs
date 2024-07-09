@@ -8,17 +8,26 @@ const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 setPersistence(auth, browserLocalPersistence).then(() => {
-const accountInfo = document.getElementById('accountInfo');
-const accountMenu = document.getElementById('accountMenu');
 const likedJobs = document.getElementById('likedJobs');
 const accountInfoMenu = document.getElementById('accountInfoMenu');
 const authAction = document.getElementById('authAction');
 const overlay = document.getElementById('overlay1');
 const segueToLogin = document.getElementById('segueToLogin');
 
-accountInfo.addEventListener('click', () => {
-    accountMenu.style.display = accountMenu.style.display === 'block' ? 'none' : 'block';
-});
+document.getElementById('accountInfo').addEventListener('click', () => {
+    const accountMenu = document.getElementById('accountMenu');
+    accountMenu.classList.toggle('fade-in');
+  });
+
+  document.getElementById('notificationButton').addEventListener('click', () => {
+    const notificationMenu = document.getElementById('notificationMenu');
+    notificationMenu.classList.toggle('fade-in');
+  });
+
+  document.getElementById('chatButton').addEventListener('click', () => {
+    const chatSidebar = document.getElementById('chatSidebar');
+    chatSidebar.classList.toggle('slide-in');
+  });
 
 likedJobs.addEventListener('click', () => {
     window.location.href = 'liked-jobs.html';

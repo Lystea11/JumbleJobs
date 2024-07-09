@@ -8,10 +8,17 @@ body, html {
   position: relative;
 }
 
-.account-info {
+.top-bar {
   position: fixed;
   top: 10px;
   right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  z-index: 1000;
+}
+
+.icon-button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -21,12 +28,11 @@ body, html {
   justify-content: center;
   color: white;
   cursor: pointer;
-  z-index: 1000;
   background-size: cover;
   background-position: center;
 }
 
-.account-menu {
+.account-menu, .notification-menu {
   display: none;
   position: fixed;
   top: 60px;
@@ -36,6 +42,48 @@ body, html {
   border-radius: 5px;
   overflow: hidden;
   z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.account-menu a, .notification-menu a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.account-menu a:last-child, .notification-menu a:last-child {
+  border-bottom: none;
+}
+
+.chat-sidebar {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.chat-content {
+  height: calc(100% - 20px);
+  overflow-y: auto;
+}
+
+.fade-in {
+  display: block !important;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+.slide-in {
+  display: block !important;
 }
 
 .overlay1 {

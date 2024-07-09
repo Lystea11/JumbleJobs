@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
             semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
         }
     });
-    document.addEventListener('mouseup', (event) => {
+    document.addEventListener('mousedown', (event) => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;
         const bufferLeft = middleX * (1 - bufferPercentage);
@@ -188,8 +188,8 @@ const loadSplineScene = async (canvasId, url) => {
         const WWWPress = spline.getVariable('didwwwpress');
         
         console.log(currentCardIndex);
-        var www = mainList[currentCardIndex].www;
-        var twitt = mainList[currentCardIndex].twitter;
+        var www = mainList[currentCardIndex-1].www;
+        var twitt = mainList[currentCardIndex-1].twitter;
         if (WWWPress) {
             window.location.href = www;
         } else if (LinkPress) {

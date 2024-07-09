@@ -34,12 +34,12 @@ body, html {
 
 #notificationButton {
   background-image: url('notifIcon.png');
-  background-size: contain;
+  background-size: cover;
 }
 
 #chatButton {
   background-image: url('chatIcon.png');
-  background-size: contain;
+  background-size: cover;
 }
 
 .account-menu, .notification-menu {

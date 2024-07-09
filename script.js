@@ -23,6 +23,7 @@ function shuffle(array) { // shuffling
   }
 
 
+var wwwrn = "";
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);
@@ -112,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function moveNext() {
+        console.log(currentCardIndex);
         if (currentCardIndex < cards.length - 1) {
             updateUserIndexLiked("add", currentCardIndex + 1);
             cards[currentCardIndex].classList.add('magictime', 'tinRightOut');

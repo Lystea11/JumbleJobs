@@ -36,6 +36,8 @@ shuffle(sortedList);
 console.log(sortedList);
 let currentCardIndex = 0;
 let isAnimating = false;
+var isHoveringOnProf = false;
+let prof = document.getElementById("accountInfo");
 
 // Initialize Firebase app
 const firebaseApp = initializeApp(firebaseConfig);
@@ -48,6 +50,13 @@ const semiCircleLeft = document.querySelector('.semi-circle.left');
 const semiCircleRight = document.querySelector('.semi-circle.right');
 
 let currentUser = null;
+
+prof.addEventListener("mouseover", (event) => {
+    isHoveringOnProf = true;
+});
+prof.addEventListener("mouseout", (event) => {
+    isHoveringOnProf = false;
+})
 
 // Listen for authentication state changes
 onAuthStateChanged(auth, (user) => {
@@ -167,9 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const bufferLeft = middleX * (1 - bufferPercentage);
         const bufferRight = middleX * (1 + bufferPercentage);
 
-        if (mouseX < bufferLeft) {
+        if (mouseX < bufferLeft && isHoveringOnProf == false) {
             movePrev();
-        } else if (mouseX > bufferRight) {
+        } else if (mouseX > bufferRight && isHoveringOnProf == false) {
             moveNext();
         }
     });

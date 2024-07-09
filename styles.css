@@ -29,6 +29,7 @@ body, html {
   cursor: pointer;
   background-size: cover;
   background-position: center;
+  animation: fadeIn 2s;
 }
 
 #notificationButton {

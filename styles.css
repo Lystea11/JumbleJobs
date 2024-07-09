@@ -45,10 +45,10 @@ body, html {
   transition: all 0.3s ease;
 }
 
-.notification-menu {
+.accountInfo {
   background-image: url(./notifIcon.png);
 }
-.chat-content {
+.chatButton {
   background-image: url(./chatIcon.png);
 }
 

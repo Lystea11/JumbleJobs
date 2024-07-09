@@ -39,7 +39,7 @@ body, html {
 
 #chatButton {
   background-image: url('chatIcon.png');
-  background-size: 10px;
+  background-size: 50px;
   animation: fadeIn 2s;
 }
 

@@ -16,12 +16,24 @@ const segueToLogin = document.getElementById('segueToLogin');
 
 document.getElementById('accountInfo').addEventListener('click', () => {
     const accountMenu = document.getElementById('accountMenu');
-    accountMenu.classList.toggle('fade-in');
+    if (accountMenu.style.display === "none" || !accountMenu.style.display) {
+      accountMenu.style.display = "block";
+      accountMenu.classList.add('fade-in');
+    } else {
+      accountMenu.style.display = "none";
+      accountMenu.classList.remove('fade-in');
+    }
   });
 
   document.getElementById('notificationButton').addEventListener('click', () => {
     const notificationMenu = document.getElementById('notificationMenu');
-    notificationMenu.classList.toggle('fade-in');
+    if (notificationMenu.style.display === "none" || !notificationMenu.style.display) {
+      notificationMenu.style.display = "block";
+      notificationMenu.classList.add('fade-in');
+    } else {
+      notificationMenu.style.display = "none";
+      notificationMenu.classList.remove('fade-in');
+    }
   });
 
   document.getElementById('chatButton').addEventListener('click', () => {

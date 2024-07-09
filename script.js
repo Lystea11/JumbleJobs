@@ -27,7 +27,6 @@ let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);
 let currentCardIndex = 0;
-var isClick = false;
 var isHoveringOnProf = false;
 let prof = document.getElementById("allMenu");
 
@@ -175,9 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (isClick) {
     updateCards();
-    }
     }
     }, 500); // Check every 500 milliseconds (1/2 second)
 });
@@ -187,12 +184,12 @@ const loadSplineScene = async (canvasId, url) => {
     const spline = new Application(canvas);
     await spline.load(url);
     spline.addEventListener('mouseup', async (e) => {
-        isClick = true;
+        const current = currentCardIndex; 
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
-        console.log(currentCardIndex);
-        var www = mainList[currentCardIndex+1].www;
-        var twitt = mainList[currentCardIndex+1].twitter;
+        console.log(current);
+        var www = mainList[current+1].www;
+        var twitt = mainList[current+1].twitter;
         if (WWWPress) {
             window.location.href = www;
         } else if (LinkPress) {

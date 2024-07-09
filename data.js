@@ -1,6 +1,6 @@
 export const mainList = [{"id":1,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://jobs.guidable.co/en/offers/5484?utm_source=Facebook+Group&utm_medium=banner&utm_campaign=FBG_5484", "twitter":"https://www.pewters.co.jp/about/"}, 
     {"id":2,"code":"https://prod.spline.design/b7j-4LkUw9fT0VdJ/scene.splinecode", "www":"https://jobs.guidable.co/en/offers/8616", "twitter":"https://gfkf500.gorp.jp/"}, 
-    {"id":3,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
+    {"id":3,"code":"https://prod.spline.design/ij8C9UQFSNwt3-aw/scene.splinecode", "www":"https://jobs.guidable.co/en/offers/9577", "twitter":"https://odakyu-highway.jp/"}, 
     {"id":4,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
     {"id":5,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 
     {"id":6,"code":"https://prod.spline.design/1K5Q-tNaVrfPjwqg/scene.splinecode", "www":"https://apple.com", "twitter":"https://x.com"}, 

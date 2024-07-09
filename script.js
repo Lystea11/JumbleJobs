@@ -37,7 +37,7 @@ console.log(sortedList);
 let currentCardIndex = 0;
 let isAnimating = false;
 var isHoveringOnProf = false;
-let prof = document.getElementById("accountInfo");
+let prof = document.getElementById("allMenu");
 
 // Initialize Firebase app
 const firebaseApp = initializeApp(firebaseConfig);

@@ -188,8 +188,8 @@ const loadSplineScene = async (canvasId, url) => {
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
-        var www = mainList[currentCardIndex+1].www;
-        var twitt = mainList[currentCardIndex+1].twitter;
+        var www = mainList[currentCardIndex].www;
+        var twitt = mainList[currentCardIndex].twitter;
         if (WWWPress) {
             window.location.href = www;
         } else if (LinkPress) {

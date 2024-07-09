@@ -45,6 +45,13 @@ body, html {
   transition: all 0.3s ease;
 }
 
+.notification-menu {
+  background-image: url(./notifIcon.png);
+}
+.chat-content {
+  background-image: url(./chatIcon.png);
+}
+
 .account-menu a, .notification-menu a {
   display: block;
   padding: 10px;

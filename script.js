@@ -188,8 +188,8 @@ const loadSplineScene = async (canvasId, url) => {
         const WWWPress = spline.getVariable('didwwwpress');
         
         console.log(currentCardIndex);
-        var www = mainList[currentCardIndex+1].www;
-        var twitt = mainList[currentCardIndex+1].twitter;
+        var www = mainList[currentCardIndex].www;
+        var twitt = mainList[currentCardIndex].twitter;
         if (WWWPress) {
             window.location.href = www;
         } else if (LinkPress) {

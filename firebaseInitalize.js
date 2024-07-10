@@ -145,7 +145,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
        item.classList.add('animate__animated', 'animate__fadeInUp');
      });
     likedJobs.addEventListener('click', () => {
-        // window.location.href = 'liked-jobs.html';
+        window.location.href = 'liked-jobs.html';
     });
 
     authAction.addEventListener('click', () => {

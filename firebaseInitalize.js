@@ -148,10 +148,6 @@ setPersistence(auth, browserLocalPersistence).then(() => {
         window.location.href = 'liked-jobs.html';
     });
 
-    accountInfoMenu.addEventListener('click', () => {
-        window.location.href = 'account-info.html';
-    });
-
     authAction.addEventListener('click', () => {
         if (auth.currentUser) {
         signOut(auth).then(() => {

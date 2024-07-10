@@ -7,7 +7,9 @@ body, html {
   background-color: #73C2FB;
   position: relative;
 }
-
+#hrtimg {
+  background-size: cover;
+}
 /* Existing styles... */
 #heartButton {
   font-size: 24px;

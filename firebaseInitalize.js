@@ -10,89 +10,42 @@ const firestore = getFirestore(firebaseApp);
 setPersistence(auth, browserLocalPersistence).then(() => {
      const overlay = document.getElementById('overlay1');
      const notificationButton = document.getElementById('notificationButton');
+     const notificationBadge = document.getElementById('notificationBadge');
+     const notificationMenu = document.getElementById('notificationMenu');
      const chatButton = document.getElementById('chatButton');
      const accountInfo = document.getElementById('accountInfo');
-     const notificationMenu = document.getElementById('notificationMenu');
      const accountMenu = document.getElementById('accountMenu');
      const chatSidebar = document.getElementById('chatSidebar');
      const closeChatButton = document.getElementById('closeChatButton');
-     const chatContent = document.getElementById('chatContent');
-     const chatInput = document.getElementById('chatInput');
-     const sendMessageButton = document.getElementById('sendMessageButton');
-     const notificationBadge = document.getElementById('notificationBadge');
-   
    
      let activeMenu = null;
-     function addMessage(message, isUser = false) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('chat-message');
-        if (isUser) {
-          messageElement.classList.add('user-message');
-        }
-    
-        messageElement.innerHTML = `
-          <div class="chat-avatar">${isUser ? '👦' : '🤖'}</div>
-          <div class="chat-bubble">${message}</div>
-        `;
-    
-        chatContent.appendChild(messageElement);
-        chatContent.scrollTop = chatContent.scrollHeight;
-      }
-    
-      function sendMessage() {
-        const message = chatInput.value.trim();
-        if (message) {
-          addMessage(message, true);
-          chatInput.value = '';
-          // Here you would typically send the message to a server
-          // and then receive a response. For this example, we'll
-          // just echo the message back after a short delay.
-          setTimeout(() => {
-            addMessage(`Thank you! We will get back to you soon.`);
-          }, 2000);
-        }
-      }
-    
-      sendMessageButton.addEventListener('click', sendMessage);
-    
-      chatInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-          sendMessage();
-        }
-      });
-
-      let isFirstNotificationOpen = true;
-
-      function toggleMenu(menu) {
-        if (activeMenu && activeMenu !== menu) {
-          activeMenu.classList.remove('active');
-        }
-        
-        if (activeMenu === menu) {
-          menu.classList.remove('active');
-          activeMenu = null;
-        } else {
-          menu.classList.add('active');
-          activeMenu = menu;
-    
-          if (menu === notificationMenu && isFirstNotificationOpen) {
-            hideNotificationBadge();
-            isFirstNotificationOpen = false;
-          }
-        }
-      }
-    
-      function hideNotificationBadge() {
-        notificationBadge.classList.add('hide');
-        notificationBadge.addEventListener('animationend', () => {
-          notificationBadge.style.display = 'none';
-        }, { once: true });
-      }
-    
-      notificationButton.addEventListener('click', (event) => {
-        event.stopPropagation();
-        toggleMenu(notificationMenu);
-      });
+     let isFirstNotificationOpen = true;
+   
+     function toggleMenu(menu) {
+       if (activeMenu && activeMenu !== menu) {
+         activeMenu.classList.remove('active');
+       }
+       
+       if (activeMenu === menu) {
+         menu.classList.remove('active');
+         activeMenu = null;
+       } else {
+         menu.classList.add('active');
+         activeMenu = menu;
+       }
+   
+       if (menu === notificationMenu && isFirstNotificationOpen) {
+         hideNotificationBadge();
+         isFirstNotificationOpen = false;
+       }
+     }
+   
+     function hideNotificationBadge() {
+       notificationBadge.classList.add('hide');
+       notificationBadge.addEventListener('animationend', () => {
+         notificationBadge.style.display = 'none';
+       }, { once: true });
+     }
    
      function closeAllMenus() {
        if (activeMenu) {
@@ -104,10 +57,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
    
      function toggleChatSidebar() {
        chatSidebar.classList.toggle('active');
-       if (activeMenu) {
-         activeMenu.classList.remove('active');
-         activeMenu = null;
-       }
+       closeAllMenus();
      }
    
      notificationButton.addEventListener('click', (event) => {
@@ -146,6 +96,46 @@ setPersistence(auth, browserLocalPersistence).then(() => {
    
      chatSidebar.addEventListener('click', (event) => {
        event.stopPropagation();
+     });
+   
+     // Chat functionality
+     const chatContent = document.getElementById('chatContent');
+     const chatInput = document.getElementById('chatInput');
+     const sendMessageButton = document.getElementById('sendMessageButton');
+   
+     function addMessage(message, isUser = false) {
+       const messageElement = document.createElement('div');
+       messageElement.classList.add('chat-message');
+       if (isUser) {
+         messageElement.classList.add('user-message');
+       }
+   
+       messageElement.innerHTML = `
+         <div class="chat-avatar">${isUser ? '👤' : '🤖'}</div>
+         <div class="chat-bubble">${message}</div>
+       `;
+   
+       chatContent.appendChild(messageElement);
+       chatContent.scrollTop = chatContent.scrollHeight;
+     }
+   
+     function sendMessage() {
+       const message = chatInput.value.trim();
+       if (message) {
+         addMessage(message, true);
+         chatInput.value = '';
+         setTimeout(() => {
+           addMessage(`You said: "${message}"`);
+         }, 1000);
+       }
+     }
+   
+     sendMessageButton.addEventListener('click', sendMessage);
+   
+     chatInput.addEventListener('keypress', (event) => {
+       if (event.key === 'Enter') {
+         sendMessage();
+       }
      });
    
      // Animate notification items

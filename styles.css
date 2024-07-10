@@ -42,12 +42,13 @@ body, html {
   top: 50%;
   font-size: 1vw;
   font-weight: bolder;
-  z-index: 2000;
+  background-color: #333;
 }
 #endOfListText {
   position: absolute;
   left: 50%;
   top: 50%;
+  background-color: #333;
   display: inherit;
   font-size: 200px;
 }

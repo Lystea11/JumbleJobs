@@ -15,6 +15,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     const accountMenu = document.getElementById('accountMenu');
     const chatSidebar = document.getElementById('chatSidebar');
     const closeChatButton = document.getElementById('closeChatButton');
+    const overlay = document.getElementById('overlay1');
   
     let activeMenu = null;
   

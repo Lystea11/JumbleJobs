@@ -17,6 +17,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     const closeChatButton = document.getElementById('closeChatButton');
     const likedJobs = document.getElementById("likedJobs");
     const accountInfoMenu = document.getElementById("accountInfoMenu");
+    const overlay = document.getElementById("overlay1")
   
     function toggleMenu(menu) {
       menu.classList.toggle('active');

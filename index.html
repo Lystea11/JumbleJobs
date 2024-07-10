@@ -9,31 +9,65 @@
   <link rel="icon" type="image/svg+xml" href="JB.svg">
 </head>
 <body>
-<div id="allMenu">
-  <div class="top-bar">
-    <div class="icon-button" id="notificationButton"></div>
-    <div class="icon-button" id="chatButton"></div>
-    <div class="icon-button" id="accountInfo">AI</div>
-  </div>
-  
-  <div class="account-menu" id="accountMenu">
-    <a href="#" id="likedJobs">Liked Jobs</a>
-    <a href="#" id="accountInfoMenu">Account Info</a>
-    <a href="#" id="authAction"></a>
-  </div>
-  
-  <div class="notification-menu" id="notificationMenu">
-    <a href="#">Notification 1</a>
-    <a href="#">Notification 2</a>
-    <a href="#">Notification 3</a>
-  </div>
-  
-  <div class="chat-sidebar" id="chatSidebar">
-    <div class="chat-content">
-      <p>Placeholder chat content...</p>
+  <div id="allMenu">
+    <div class="top-bar">
+      <div class="icon-button" id="notificationButton">
+        <span class="notification-badge">3</span>
+      </div>
+      <div class="icon-button" id="chatButton"></div>
+      <div class="icon-button" id="accountInfo">AI</div>
+    </div>
+    
+    <div class="menu-container">
+      <div class="account-menu" id="accountMenu">
+        <a href="#" id="likedJobs">Liked Jobs</a>
+        <a href="#" id="accountInfoMenu">Account Info</a>
+        <a href="#" id="authAction"></a>
+      </div>
+      
+      <div class="notification-menu" id="notificationMenu">
+        <div class="notification-item">
+          <div class="notification-icon">📢</div>
+          <div class="notification-content">
+            <h4>New Job Alert</h4>
+            <p>A new job matching your skills has been posted!</p>
+          </div>
+        </div>
+        <div class="notification-item">
+          <div class="notification-icon">👍</div>
+          <div class="notification-content">
+            <h4>Application Update</h4>
+            <p>Your application has been viewed by the employer.</p>
+          </div>
+        </div>
+        <div class="notification-item">
+          <div class="notification-icon">🎉</div>
+          <div class="notification-content">
+            <h4>Congratulations!</h4>
+            <p>You've been invited for an interview.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="chat-sidebar" id="chatSidebar">
+      <div class="chat-header">
+        <h3>Chat</h3>
+        <button id="closeChatButton">&times;</button>
+      </div>
+      <div class="chat-content">
+        <div class="chat-message">
+          <div class="chat-avatar">👤</div>
+          <div class="chat-bubble">Hello! How can I help you today?</div>
+        </div>
+        <!-- Add more chat messages here -->
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Type your message...">
+        <button>Send</button>
+      </div>
     </div>
   </div>
-</div>
 <div class="container">
   <div class="overlay">
     <div class="semi-circle left"></div>

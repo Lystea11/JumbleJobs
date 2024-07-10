@@ -8,38 +8,51 @@ const auth = getAuth(firebaseApp);
 const firestore = getFirestore(firebaseApp);
 
 setPersistence(auth, browserLocalPersistence).then(() => {
-const likedJobs = document.getElementById('likedJobs');
-const accountInfoMenu = document.getElementById('accountInfoMenu');
-const authAction = document.getElementById('authAction');
-const overlay = document.getElementById('overlay1');
-const segueToLogin = document.getElementById('segueToLogin');
-
-document.getElementById('accountInfo').addEventListener('click', () => {
-    const accountMenu = document.getElementById('accountMenu');
-    if (accountMenu.style.display === "none" || !accountMenu.style.display) {
-      accountMenu.style.display = "block";
-      accountMenu.classList.add('slide-in');
-    } else {
-      accountMenu.style.display = "none";
-      accountMenu.classList.remove('slide-in');
-    }
-  });
-
-  document.getElementById('notificationButton').addEventListener('click', () => {
+    const notificationButton = document.getElementById('notificationButton');
+    const chatButton = document.getElementById('chatButton');
+    const accountInfo = document.getElementById('accountInfo');
     const notificationMenu = document.getElementById('notificationMenu');
-    if (notificationMenu.style.display === "none" || !notificationMenu.style.display) {
-      notificationMenu.style.display = "block";
-      notificationMenu.classList.add('slide-in');
-    } else {
-      notificationMenu.style.display = "none";
-      notificationMenu.classList.remove('slide-in');
-    }
-  });
-
-  document.getElementById('chatButton').addEventListener('click', () => {
+    const accountMenu = document.getElementById('accountMenu');
     const chatSidebar = document.getElementById('chatSidebar');
-    chatSidebar.classList.toggle('slide-in');
-  });
+    const closeChatButton = document.getElementById('closeChatButton');
+    const likedJobs = document.getElementById("likedJobs");
+    const accountInfoMenu = document.getElementById("accountInfoMenu");
+  
+    function toggleMenu(menu) {
+      menu.classList.toggle('active');
+    }
+  
+    notificationButton.addEventListener('click', () => {
+      toggleMenu(notificationMenu);
+      accountMenu.classList.remove('active');
+    });
+  
+    accountInfo.addEventListener('click', () => {
+      toggleMenu(accountMenu);
+      notificationMenu.classList.remove('active');
+    });
+  
+    chatButton.addEventListener('click', () => {
+      chatSidebar.classList.add('active');
+    });
+  
+    closeChatButton.addEventListener('click', () => {
+      chatSidebar.classList.remove('active');
+    });
+  
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('#allMenu')) {
+        notificationMenu.classList.remove('active');
+        accountMenu.classList.remove('active');
+      }
+    });
+  
+    // Animate notification items
+    const notificationItems = document.querySelectorAll('.notification-item');
+    notificationItems.forEach((item, index) => {
+      item.style.animationDelay = `${index * 0.1}s`;
+      item.classList.add('animate__animated', 'animate__fadeInUp');
+    });
 
 likedJobs.addEventListener('click', () => {
     window.location.href = 'liked-jobs.html';

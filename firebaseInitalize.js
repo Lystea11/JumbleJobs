@@ -9,63 +9,78 @@ const firestore = getFirestore(firebaseApp);
 
 setPersistence(auth, browserLocalPersistence).then(() => {
      const overlay = document.getElementById('overlay1');
-     const notificationButton = document.getElementById('notificationButton');
-     const chatButton = document.getElementById('chatButton');
-     const accountInfo = document.getElementById('accountInfo');
-     const notificationMenu = document.getElementById('notificationMenu');
-     const accountMenu = document.getElementById('accountMenu');
-     const chatSidebar = document.getElementById('chatSidebar');
-     const closeChatButton = document.getElementById('closeChatButton');
-   
-     let activeMenu = null;
-   
-     function toggleMenu(menu) {
-       if (activeMenu && activeMenu !== menu) {
-         activeMenu.classList.remove('active');
-       }
-       menu.classList.toggle('active');
-       activeMenu = menu.classList.contains('active') ? menu : null;
-     }
-   
-     notificationButton.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleMenu(notificationMenu);
-     });
-   
-     accountInfo.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleMenu(accountMenu);
-     });
-   
-     chatButton.addEventListener('click', (event) => {
-       event.stopPropagation();
-       chatSidebar.classList.add('active');
-       if (activeMenu) {
-         activeMenu.classList.remove('active');
-         activeMenu = null;
-       }
-     });
-   
-     closeChatButton.addEventListener('click', () => {
-       chatSidebar.classList.remove('active');
-     });
-   
-     document.addEventListener('click', (event) => {
-       if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
-         if (activeMenu) {
-           activeMenu.classList.remove('active');
-           activeMenu = null;
-         }
-         chatSidebar.classList.remove('active');
-       }
-     });
-   
-     // Animate notification items
-     const notificationItems = document.querySelectorAll('.notification-item');
-     notificationItems.forEach((item, index) => {
-       item.style.animationDelay = `${index * 0.1}s`;
-       item.classList.add('animate__animated', 'animate__fadeInUp');
-     });
+    const notificationButton = document.getElementById('notificationButton');
+    const chatButton = document.getElementById('chatButton');
+    const accountInfo = document.getElementById('accountInfo');
+    const notificationMenu = document.getElementById('notificationMenu');
+    const accountMenu = document.getElementById('accountMenu');
+    const chatSidebar = document.getElementById('chatSidebar');
+    const closeChatButton = document.getElementById('closeChatButton');
+    
+    let activeMenu = null;
+    
+    function toggleMenu(menu) {
+        if (activeMenu && activeMenu !== menu) {
+        activeMenu.classList.remove('active');
+        }
+        
+        if (activeMenu === menu) {
+        menu.classList.remove('active');
+        activeMenu = null;
+        } else {
+        menu.classList.add('active');
+        activeMenu = menu;
+        }
+    }
+    
+    notificationButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(notificationMenu);
+    });
+    
+    accountInfo.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(accountMenu);
+    });
+    
+    chatButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        chatSidebar.classList.add('active');
+        if (activeMenu) {
+        activeMenu.classList.remove('active');
+        activeMenu = null;
+        }
+    });
+    
+    closeChatButton.addEventListener('click', () => {
+        chatSidebar.classList.remove('active');
+    });
+    
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
+        if (activeMenu) {
+            activeMenu.classList.remove('active');
+            activeMenu = null;
+        }
+        chatSidebar.classList.remove('active');
+        }
+    });
+    
+    // Prevent clicks inside menus from closing them
+    notificationMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    
+    accountMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    
+    // Animate notification items
+    const notificationItems = document.querySelectorAll('.notification-item');
+    notificationItems.forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.1}s`;
+        item.classList.add('animate__animated', 'animate__fadeInUp');
+    });
 
     likedJobs.addEventListener('click', () => {
         window.location.href = 'liked-jobs.html';

@@ -78,24 +78,25 @@ setPersistence(auth, browserLocalPersistence).then(() => {
         chatSidebar.classList.remove('active');
       });
    
-     document.addEventListener('click', (event) => {
-       if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
-         closeAllMenus();
-       }
-     });
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
+          closeAllMenus();
+          chatSidebar.classList.remove('active');
+        }
+      });
+    
+      // Prevent clicks inside menus from closing them
+      notificationMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
    
-     // Prevent clicks inside menus from closing them
-     notificationMenu.addEventListener('click', (event) => {
-       event.stopPropagation();
-     });
-   
-     accountMenu.addEventListener('click', (event) => {
-       event.stopPropagation();
-     });
-   
-     chatSidebar.addEventListener('click', (event) => {
-       event.stopPropagation();
-     });
+      accountMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+    
+      chatSidebar.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
    
      // Chat functionality
      const chatContent = document.getElementById('chatContent');
@@ -124,8 +125,8 @@ setPersistence(auth, browserLocalPersistence).then(() => {
          addMessage(message, true);
          chatInput.value = '';
          setTimeout(() => {
-           addMessage(`You said: "${message}"`);
-         }, 1000);
+           addMessage(`Thank you! We will get in contact soon.`);
+         }, 1500);
        }
      }
    

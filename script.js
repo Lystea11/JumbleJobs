@@ -197,9 +197,9 @@ const loadSplineScene = async (canvasId, url) => {
         const WWWPress = spline.getVariable('didwwwpress');
         console.log(linkrn);
         if (WWWPress) {
-            window.location.href = wwwrn, "_blank", "noopener, noreferrer";
+            window.open(wwwrn, "_blank", "noopener, noreferrer");
         } else if (LinkPress) {
-            window.location.href = linkrn, "_blank", "noopener, noreferrer";
+            window.open(linkrn, "_blank", "noopener, noreferrer");
         } 
     });
 };

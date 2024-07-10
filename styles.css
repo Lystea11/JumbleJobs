@@ -9,7 +9,7 @@ body, html {
 }
 /* Existing styles... */
 #heartButton {
-  background-size: 50px;
+  background-size: 30px;
   background-repeat: no-repeat;
   background-image: url("heart.webp");
   font-size: 24px;

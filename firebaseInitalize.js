@@ -29,7 +29,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
         }
     
         messageElement.innerHTML = `
-          <div class="chat-avatar">${isUser ? '👤' : '🤖'}</div>
+          <div class="chat-avatar">${isUser ? '👦' : '🤖'}</div>
           <div class="chat-bubble">${message}</div>
         `;
     
@@ -46,8 +46,8 @@ setPersistence(auth, browserLocalPersistence).then(() => {
           // and then receive a response. For this example, we'll
           // just echo the message back after a short delay.
           setTimeout(() => {
-            addMessage(`You said: "${message}"`);
-          }, 1000);
+            addMessage(`Thank you! We will get back to you soon.`);
+          }, 2000);
         }
       }
     

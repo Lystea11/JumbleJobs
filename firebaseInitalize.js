@@ -33,6 +33,14 @@ setPersistence(auth, browserLocalPersistence).then(() => {
         }
     }
     
+    function closeAllMenus() {
+        if (activeMenu) {
+        activeMenu.classList.remove('active');
+        activeMenu = null;
+        }
+        chatSidebar.classList.remove('active');
+    }
+    
     notificationButton.addEventListener('click', (event) => {
         event.stopPropagation();
         toggleMenu(notificationMenu);
@@ -45,11 +53,8 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     
     chatButton.addEventListener('click', (event) => {
         event.stopPropagation();
+        closeAllMenus();
         chatSidebar.classList.add('active');
-        if (activeMenu) {
-        activeMenu.classList.remove('active');
-        activeMenu = null;
-        }
     });
     
     closeChatButton.addEventListener('click', () => {
@@ -58,11 +63,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     
     document.addEventListener('click', (event) => {
         if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
-        if (activeMenu) {
-            activeMenu.classList.remove('active');
-            activeMenu = null;
-        }
-        chatSidebar.classList.remove('active');
+        closeAllMenus();
         }
     });
     
@@ -72,6 +73,10 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     });
     
     accountMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+    
+    chatSidebar.addEventListener('click', (event) => {
         event.stopPropagation();
     });
     

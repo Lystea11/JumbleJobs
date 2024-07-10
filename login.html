@@ -10,7 +10,7 @@
   <div class="container">
     <h1>Sign into Jumble</h1>
     <button id="btn-login">Sign in with Google</button>
-    <button id="btn-logout" style="display: none;">Sign out</button>
+    <button id="btn-logout" style="display: none;">Go to Jumble!</button>
   </div>
 
   <!-- Firebase scripts -->
@@ -75,15 +75,7 @@
 
       // Sign out
       btnLogout.addEventListener('click', () => {
-        signOut(auth).then(() => {
-          console.log('User signed out');
-          alert('Signed out successfully!');
-          btnLogin.style.display = 'block';
-          btnLogout.style.display = 'none';
-        }).catch((error) => {
-          console.error('Error signing out: ', error);
-          alert('Sign-out failed. Please try again.');
-        });
+        window.location.href("index.html");
       });
 
       // Listen for authentication state changes

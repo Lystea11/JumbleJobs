@@ -35,6 +35,22 @@ body, html {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+#endOfList {
+  position: fixed;
+  display: block;
+  left: 50%;
+  top: 50%;
+  font-size: 1vw;
+  font-weight: bolder;
+}
+#endOfListText {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: inherit;
+  font-size: 200px;
+}
+
 .icon-button:hover {
   transform: scale(1.1);
   box-shadow: 0 0 15px rgba(11, 194, 255, 0.5);

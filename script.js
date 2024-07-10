@@ -105,6 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let inRightBuffer = false;
 
     function updateCards() {
+        if (currentCardIndex == 0) {
+            wwwrn = mainList[currentCardIndex+1].www;
+            linkrn = mainList[currentCardIndex+1].twitter;
+        }else {
+        wwwrn = mainList[currentCardIndex].www;
+        linkrn = mainList[currentCardIndex].twitter;
+        }
+        
         cards.forEach((card, index) => {
             card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'spaceInUp');
             if (index === currentCardIndex) {
@@ -120,8 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
             setTimeout(() => {
                 currentCardIndex++;
-                wwwrn = mainList[currentCardIndex-1].www;
-                linkrn = mainList[currentCardIndex-1].twitter;
                 updateCards();
             }, 900); // Match the animation duration of Magic CSS Animations
         }

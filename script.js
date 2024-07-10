@@ -23,8 +23,7 @@ function shuffle(array) { // shuffling
   }
 
 
-var wwwrn = mainList[currentCardIndex+1].www;
-var linkrn = mainList[currentCardIndex+1].twitter;
+
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);
@@ -88,8 +87,11 @@ async function updateUserIndexLiked(operation, index) {
         console.error("Error updating document: ", error);
     }
 }
-
+var wwwrn = "";
+var linkrn = "";
 document.addEventListener('DOMContentLoaded', () => {
+    wwwrn = mainList[currentCardIndex+1].www;
+    linkrn = mainList[currentCardIndex+1].twitter;
     const checkLoginStatus = setInterval(() => {
         if (HasUserLoaded) {
             clearInterval(checkLoginStatus);

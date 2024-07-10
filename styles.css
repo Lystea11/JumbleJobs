@@ -42,6 +42,7 @@ body, html {
   top: 50%;
   font-size: 1vw;
   font-weight: bolder;
+  z-index: 2000;
 }
 #endOfListText {
   position: absolute;

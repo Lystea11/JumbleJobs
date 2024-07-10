@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cards = Array.from(document.querySelectorAll('.card'));
     const semiCircleLeft = document.querySelector('.semi-circle.left');
     const semiCircleRight = document.querySelector('.semi-circle.right');
-    const bufferPercentage = 0.45;
+    const bufferPercentage = 0.25;
     let isAnimating = false;
     let currentCardIndex = 0;
     let inLeftBuffer = false;
@@ -121,7 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function moveNext() {
         console.log(currentCardIndex);
-        if (currentCardIndex < cards.length - 1) {
+        if (currentCardIndex >= 0) {
+            if (currentCardIndex == cards.length) {
+                
+            }
             updateUserIndexLiked("add", currentCardIndex + 1);
             cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
             setTimeout(() => {
@@ -133,6 +136,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function movePrev() {
         if (currentCardIndex >= 0) {
+            if (currentCardIndex == cards.length) {
+                
+            }
             updateUserIndexLiked("remove", currentCardIndex + 1);
             cards[currentCardIndex].classList.add('magictime', 'tinLeftOut');
             setTimeout(() => {

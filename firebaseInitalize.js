@@ -145,20 +145,20 @@ setPersistence(auth, browserLocalPersistence).then(() => {
        item.classList.add('animate__animated', 'animate__fadeInUp');
      });
     likedJobs.addEventListener('click', () => {
-        window.location.href = 'liked-jobs.html';
+        // window.location.href = 'liked-jobs.html';
     });
 
     authAction.addEventListener('click', () => {
         if (auth.currentUser) {
         signOut(auth).then(() => {
             alert('Signed out successfully!');
-            window.location.href = 'index.html';
+            // window.location.href = 'index.html';
         }).catch((error) => {
             console.error('Error signing out: ', error);
             alert('Sign-out failed. Please try again.');
         });
         } else {
-        window.location.href = 'login.html';
+        // window.location.href = 'login.html';
         }
     });
 

@@ -22,62 +22,61 @@ setPersistence(auth, browserLocalPersistence).then(() => {
      let isFirstNotificationOpen = true;
    
      function toggleMenu(menu) {
-       if (activeMenu && activeMenu !== menu) {
-         activeMenu.classList.remove('active');
-       }
-       
-       if (activeMenu === menu) {
-         menu.classList.remove('active');
-         activeMenu = null;
-       } else {
-         menu.classList.add('active');
-         activeMenu = menu;
-       }
+        if (activeMenu && activeMenu !== menu) {
+          activeMenu.classList.remove('active');
+        }
+        
+        if (activeMenu === menu) {
+          menu.classList.remove('active');
+          activeMenu = null;
+        } else {
+          menu.classList.add('active');
+          activeMenu = menu;
+        }
+    
+        if (menu === notificationMenu && isFirstNotificationOpen) {
+          hideNotificationBadge();
+          isFirstNotificationOpen = false;
+        }
+      }
    
-       if (menu === notificationMenu && isFirstNotificationOpen) {
-         hideNotificationBadge();
-         isFirstNotificationOpen = false;
-       }
-     }
+      function hideNotificationBadge() {
+        notificationBadge.classList.add('hide');
+        notificationBadge.addEventListener('animationend', () => {
+          notificationBadge.style.display = 'none';
+        }, { once: true });
+      }
    
-     function hideNotificationBadge() {
-       notificationBadge.classList.add('hide');
-       notificationBadge.addEventListener('animationend', () => {
-         notificationBadge.style.display = 'none';
-       }, { once: true });
-     }
+      function closeAllMenus() {
+        if (activeMenu) {
+          activeMenu.classList.remove('active');
+          activeMenu = null;
+        }
+      }
    
-     function closeAllMenus() {
-       if (activeMenu) {
-         activeMenu.classList.remove('active');
-         activeMenu = null;
-       }
-       chatSidebar.classList.remove('active');
-     }
+      function toggleChatSidebar() {
+        chatSidebar.classList.toggle('active');
+        closeAllMenus();
+      }
    
-     function toggleChatSidebar() {
-       chatSidebar.classList.toggle('active');
-       closeAllMenus();
-     }
+      notificationButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(notificationMenu);
+      });
    
-     notificationButton.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleMenu(notificationMenu);
-     });
+      accountInfo.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(accountMenu);
+      });
    
-     accountInfo.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleMenu(accountMenu);
-     });
-   
-     chatButton.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleChatSidebar();
-     });
-   
-     closeChatButton.addEventListener('click', () => {
-       chatSidebar.classList.remove('active');
-     });
+      chatButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleChatSidebar();
+      });
+    
+      closeChatButton.addEventListener('click', () => {
+        chatSidebar.classList.remove('active');
+      });
    
      document.addEventListener('click', (event) => {
        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {

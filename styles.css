@@ -39,6 +39,7 @@ body, html {
 #navbar-title {
   align-items: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #fff;
   font-size: 1.5em;
   font-weight: bold;
   cursor: pointer;

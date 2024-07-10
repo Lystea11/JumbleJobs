@@ -120,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
             setTimeout(() => {
                 currentCardIndex++;
-                wwwrn = mainList[currentCardIndex+1].www;
-                linkrn = mainList[currentCardIndex+1].twitter;
+                wwwrn = mainList[currentCardIndex-1].www;
+                linkrn = mainList[currentCardIndex-1].twitter;
                 updateCards();
             }, 900); // Match the animation duration of Magic CSS Animations
         }
@@ -191,6 +191,7 @@ const loadSplineScene = async (canvasId, url) => {
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
+        console.log(linkrn);
         if (WWWPress) {
             window.location.href = wwwrn;
         } else if (LinkPress) {

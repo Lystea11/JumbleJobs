@@ -346,7 +346,7 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .card {

@@ -24,6 +24,7 @@ function shuffle(array) { // shuffling
 
 
 var wwwrn = "";
+var linkrn = "";
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);
@@ -119,6 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
             setTimeout(() => {
                 currentCardIndex++;
+                wwwrn = mainList[currentCardIndex+1].www;
+                linkrn = mainList[currentCardIndex+1].twitter;
                 updateCards();
             }, 900); // Match the animation duration of Magic CSS Animations
         }
@@ -188,14 +191,10 @@ const loadSplineScene = async (canvasId, url) => {
     spline.addEventListener('mouseup', async (e) => {
         const LinkPress = spline.getVariable('didlinkpress');
         const WWWPress = spline.getVariable('didwwwpress');
-        
-        console.log(currentCardIndex);
-        var www = mainList[currentCardIndex-1].www;
-        var twitt = mainList[currentCardIndex-1].twitter;
         if (WWWPress) {
-            window.location.href = www;
+            window.location.href = wwwrn;
         } else if (LinkPress) {
-            window.location.href = twitt;
+            window.location.href = linkrn;
         } 
     });
 };

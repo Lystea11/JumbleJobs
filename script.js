@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import { getFirestore, doc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 import { firebaseConfig } from "./firebase-config.js";
-import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.8.8/build/runtime.min.js';
+import { Application } from 'https://cdn.jsdelivr.net/npm/@splinetool/runtime@1.8.9/build/runtime.min.js';
 import { mainList } from "./data.js";
 var HasUserLoaded = false;
 

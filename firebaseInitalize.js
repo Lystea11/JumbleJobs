@@ -15,25 +15,29 @@ setPersistence(auth, browserLocalPersistence).then(() => {
     const accountMenu = document.getElementById('accountMenu');
     const chatSidebar = document.getElementById('chatSidebar');
     const closeChatButton = document.getElementById('closeChatButton');
-    const likedJobs = document.getElementById("likedJobs");
-    const accountInfoMenu = document.getElementById("accountInfoMenu");
-    const overlay = document.getElementById("overlay1")
+  
+    let activeMenu = null;
   
     function toggleMenu(menu) {
+      if (activeMenu && activeMenu !== menu) {
+        activeMenu.classList.remove('active');
+      }
       menu.classList.toggle('active');
+      activeMenu = menu.classList.contains('active') ? menu : null;
     }
   
-    notificationButton.addEventListener('click', () => {
+    notificationButton.addEventListener('click', (event) => {
+      event.stopPropagation();
       toggleMenu(notificationMenu);
-      accountMenu.classList.remove('active');
     });
   
-    accountInfo.addEventListener('click', () => {
+    accountInfo.addEventListener('click', (event) => {
+      event.stopPropagation();
       toggleMenu(accountMenu);
-      notificationMenu.classList.remove('active');
     });
   
-    chatButton.addEventListener('click', () => {
+    chatButton.addEventListener('click', (event) => {
+      event.stopPropagation();
       chatSidebar.classList.add('active');
     });
   
@@ -43,8 +47,11 @@ setPersistence(auth, browserLocalPersistence).then(() => {
   
     document.addEventListener('click', (event) => {
       if (!event.target.closest('#allMenu')) {
-        notificationMenu.classList.remove('active');
-        accountMenu.classList.remove('active');
+        if (activeMenu) {
+          activeMenu.classList.remove('active');
+          activeMenu = null;
+        }
+        chatSidebar.classList.remove('active');
       }
     });
   
@@ -55,61 +62,61 @@ setPersistence(auth, browserLocalPersistence).then(() => {
       item.classList.add('animate__animated', 'animate__fadeInUp');
     });
 
-likedJobs.addEventListener('click', () => {
-    window.location.href = 'liked-jobs.html';
-});
-
-accountInfoMenu.addEventListener('click', () => {
-    window.location.href = 'account-info.html';
-});
-
-authAction.addEventListener('click', () => {
-    if (auth.currentUser) {
-    signOut(auth).then(() => {
-        alert('Signed out successfully!');
-        window.location.href = 'index.html';
-    }).catch((error) => {
-        console.error('Error signing out: ', error);
-        alert('Sign-out failed. Please try again.');
+    likedJobs.addEventListener('click', () => {
+        window.location.href = 'liked-jobs.html';
     });
-    } else {
-    window.location.href = 'login.html';
-    }
-});
 
-auth.onAuthStateChanged((user) => {
-    if (user) {
-    const userRef = doc(firestore, 'users', user.uid);
-    getDoc(userRef).then((docSnap) => {
-        if (docSnap.exists()) {
-        const userData = docSnap.data();
-        accountInfo.style.backgroundImage = `url(${userData.photoURL})`;
-        accountInfo.textContent = '';
-        authAction.textContent = 'Log Out';
-        overlay.style.display = 'none';
+    accountInfoMenu.addEventListener('click', () => {
+        window.location.href = 'account-info.html';
+    });
+
+    authAction.addEventListener('click', () => {
+        if (auth.currentUser) {
+        signOut(auth).then(() => {
+            alert('Signed out successfully!');
+            window.location.href = 'index.html';
+        }).catch((error) => {
+            console.error('Error signing out: ', error);
+            alert('Sign-out failed. Please try again.');
+        });
         } else {
-        console.log('No such document!');
+        window.location.href = 'login.html';
         }
-    }).catch((error) => {
-        console.log('Error getting document:', error);
     });
-    } else {
-    accountInfo.style.backgroundImage = '';
-    accountInfo.textContent = 'AI';
-    authAction.textContent = 'Log In';
-    overlay.style.display = 'flex';
-    }
-});
 
-window.addEventListener('click', (event) => {
-    if (!accountInfo.contains(event.target) && !accountMenu.contains(event.target)) {
-    accountMenu.style.display = 'none';
-    }
-});
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+        const userRef = doc(firestore, 'users', user.uid);
+        getDoc(userRef).then((docSnap) => {
+            if (docSnap.exists()) {
+            const userData = docSnap.data();
+            accountInfo.style.backgroundImage = `url(${userData.photoURL})`;
+            accountInfo.textContent = '';
+            authAction.textContent = 'Log Out';
+            overlay.style.display = 'none';
+            } else {
+            console.log('No such document!');
+            }
+        }).catch((error) => {
+            console.log('Error getting document:', error);
+        });
+        } else {
+        accountInfo.style.backgroundImage = '';
+        accountInfo.textContent = 'AI';
+        authAction.textContent = 'Log In';
+        overlay.style.display = 'flex';
+        }
+    });
 
-segueToLogin.addEventListener('click', () => {
-    window.location.href = 'login.html';
-});
+    window.addEventListener('click', (event) => {
+        if (!accountInfo.contains(event.target) && !accountMenu.contains(event.target)) {
+        accountMenu.style.display = 'none';
+        }
+    });
+
+    segueToLogin.addEventListener('click', () => {
+        window.location.href = 'login.html';
+    });
 }).catch((error) => {
     console.error('Error setting persistence: ', error);
 });

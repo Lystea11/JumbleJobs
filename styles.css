@@ -21,7 +21,6 @@ body, html {
 }
 
 .icon-button {
-  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -64,11 +63,6 @@ body, html {
   padding: 2px 6px;
   border-radius: 50%;
   transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-cssCopy.icon-button {
-  position: relative;
-  /* ... other existing styles ... */
 }
 
 .notification-badge {

@@ -16,9 +16,48 @@ setPersistence(auth, browserLocalPersistence).then(() => {
      const accountMenu = document.getElementById('accountMenu');
      const chatSidebar = document.getElementById('chatSidebar');
      const closeChatButton = document.getElementById('closeChatButton');
+     const chatContent = document.getElementById('chatContent');
+     const chatInput = document.getElementById('chatInput');
+     const sendMessageButton = document.getElementById('sendMessageButton');
    
      let activeMenu = null;
-   
+     function addMessage(message, isUser = false) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message');
+        if (isUser) {
+          messageElement.classList.add('user-message');
+        }
+    
+        messageElement.innerHTML = `
+          <div class="chat-avatar">${isUser ? '👤' : '🤖'}</div>
+          <div class="chat-bubble">${message}</div>
+        `;
+    
+        chatContent.appendChild(messageElement);
+        chatContent.scrollTop = chatContent.scrollHeight;
+      }
+    
+      function sendMessage() {
+        const message = chatInput.value.trim();
+        if (message) {
+          addMessage(message, true);
+          chatInput.value = '';
+          // Here you would typically send the message to a server
+          // and then receive a response. For this example, we'll
+          // just echo the message back after a short delay.
+          setTimeout(() => {
+            addMessage(`You said: "${message}"`);
+          }, 1000);
+        }
+      }
+    
+      sendMessageButton.addEventListener('click', sendMessage);
+    
+      chatInput.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          sendMessage();
+        }
+      });
      function toggleMenu(menu) {
        if (activeMenu && activeMenu !== menu) {
          activeMenu.classList.remove('active');

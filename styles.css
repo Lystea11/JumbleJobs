@@ -9,9 +9,9 @@ body, html {
 }
 /* Existing styles... */
 #heartButton {
-  background-size: 30px;
+  background-size: 35px;
   background-repeat: no-repeat;
-  background-image: url("heart.webp");
+  background-image: url("heart.png");
   font-size: 24px;
   display: flex;
   align-items: center;

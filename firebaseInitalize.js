@@ -20,6 +20,13 @@ setPersistence(auth, browserLocalPersistence).then(() => {
    
      let activeMenu = null;
      let isFirstNotificationOpen = true;
+
+     const heartButton = document.getElementById('heartButton');
+
+     heartButton.addEventListener('click', () => {
+       // Replace 'liked-jobs.html' with the actual URL of the page you want to navigate to
+       window.location.href = 'liked-jobs.html';
+     });
    
      function toggleMenu(menu) {
         if (activeMenu && activeMenu !== menu) {

@@ -9,6 +9,18 @@ body, html {
 }
 
 /* Existing styles... */
+#heartButton {
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#heartButton:hover {
+  transform: scale(1.1);
+}
 
 .top-bar {
   position: fixed;

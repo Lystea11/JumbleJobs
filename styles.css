@@ -108,7 +108,6 @@ body, html {
 }
 
 .notification-menu {
-  position: fixed;
   width: 300px;
   max-height: 400px;
   overflow-y: auto;

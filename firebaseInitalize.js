@@ -25,7 +25,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
 
      heartButton.addEventListener('click', () => {
        // Replace 'liked-jobs.html' with the actual URL of the page you want to navigate to
-       window.location.href = 'liked-jobs.html';
+       location.assign("index.html");
      });
    
      function toggleMenu(menu) {

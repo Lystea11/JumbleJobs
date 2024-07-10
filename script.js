@@ -23,8 +23,8 @@ function shuffle(array) { // shuffling
   }
 
 
-var wwwrn = "";
-var linkrn = "";
+var wwwrn = mainList[currentCardIndex+1].www;
+var linkrn = mainList[currentCardIndex+1].twitter;
 let sortedList = mainList;
 shuffle(sortedList);
 console.log(sortedList);
@@ -105,13 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let inRightBuffer = false;
 
     function updateCards() {
-        if (currentCardIndex == 0) {
-            wwwrn = mainList[currentCardIndex+1].www;
-            linkrn = mainList[currentCardIndex+1].twitter;
-        }else {
         wwwrn = mainList[currentCardIndex].www;
         linkrn = mainList[currentCardIndex].twitter;
-        }
+        
         
         cards.forEach((card, index) => {
             card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'spaceInUp');

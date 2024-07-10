@@ -111,7 +111,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
        }
    
        messageElement.innerHTML = `
-         <div class="chat-avatar">${isUser ? '👤' : '🤖'}</div>
+         <div class="chat-avatar">${isUser ? '👦' : '👤'}</div>
          <div class="chat-bubble">${message}</div>
        `;
    

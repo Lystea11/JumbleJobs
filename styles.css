@@ -24,6 +24,18 @@ body, html {
   transform: scale(1.1);
 }
 
+.navbar-title {
+  align-items: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-title:hover {
+  transform: scale(1.1);
+}
+
 .top-bar {
   position: fixed;
   top: 20px;

@@ -21,6 +21,7 @@ body, html {
 }
 
 .icon-button {
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -57,12 +58,47 @@ body, html {
   position: absolute;
   top: -5px;
   right: -5px;
-  background-color: rgba(255, 99, 71, 0.727);
+  background-color: red;
   color: white;
   font-size: 12px;
   padding: 2px 6px;
   border-radius: 50%;
-  animation: pulse 1.5s infinite;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+cssCopy.icon-button {
+  position: relative;
+  /* ... other existing styles ... */
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+@keyframes fadeOutZoom {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+.notification-badge.hide {
+  animation: fadeOutZoom 0.5s forwards;
 }
 
 @keyframes pulse {

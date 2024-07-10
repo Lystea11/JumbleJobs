@@ -19,6 +19,8 @@ setPersistence(auth, browserLocalPersistence).then(() => {
      const chatContent = document.getElementById('chatContent');
      const chatInput = document.getElementById('chatInput');
      const sendMessageButton = document.getElementById('sendMessageButton');
+     const notificationBadge = document.getElementById('notificationBadge');
+   
    
      let activeMenu = null;
      function addMessage(message, isUser = false) {
@@ -58,19 +60,39 @@ setPersistence(auth, browserLocalPersistence).then(() => {
           sendMessage();
         }
       });
-     function toggleMenu(menu) {
-       if (activeMenu && activeMenu !== menu) {
-         activeMenu.classList.remove('active');
-       }
-       
-       if (activeMenu === menu) {
-         menu.classList.remove('active');
-         activeMenu = null;
-       } else {
-         menu.classList.add('active');
-         activeMenu = menu;
-       }
-     }
+
+      let isFirstNotificationOpen = true;
+
+      function toggleMenu(menu) {
+        if (activeMenu && activeMenu !== menu) {
+          activeMenu.classList.remove('active');
+        }
+        
+        if (activeMenu === menu) {
+          menu.classList.remove('active');
+          activeMenu = null;
+        } else {
+          menu.classList.add('active');
+          activeMenu = menu;
+    
+          if (menu === notificationMenu && isFirstNotificationOpen) {
+            hideNotificationBadge();
+            isFirstNotificationOpen = false;
+          }
+        }
+      }
+    
+      function hideNotificationBadge() {
+        notificationBadge.classList.add('hide');
+        notificationBadge.addEventListener('animationend', () => {
+          notificationBadge.style.display = 'none';
+        }, { once: true });
+      }
+    
+      notificationButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(notificationMenu);
+      });
    
      function closeAllMenus() {
        if (activeMenu) {

@@ -18,10 +18,10 @@ document.getElementById('accountInfo').addEventListener('click', () => {
     const accountMenu = document.getElementById('accountMenu');
     if (accountMenu.style.display === "none" || !accountMenu.style.display) {
       accountMenu.style.display = "block";
-      accountMenu.classList.add('fade-in');
+      accountMenu.classList.add('slide-in');
     } else {
       accountMenu.style.display = "none";
-      accountMenu.classList.remove('fade-in');
+      accountMenu.classList.remove('slide-in');
     }
   });
 
@@ -29,10 +29,10 @@ document.getElementById('accountInfo').addEventListener('click', () => {
     const notificationMenu = document.getElementById('notificationMenu');
     if (notificationMenu.style.display === "none" || !notificationMenu.style.display) {
       notificationMenu.style.display = "block";
-      notificationMenu.classList.add('fade-in');
+      notificationMenu.classList.add('slide-in');
     } else {
       notificationMenu.style.display = "none";
-      notificationMenu.classList.remove('fade-in');
+      notificationMenu.classList.remove('slide-in');
     }
   });
 

@@ -74,6 +74,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
       accountInfo.addEventListener('click', (event) => {
         event.stopPropagation();
         toggleMenu(accountMenu);
+        accountMenu.style.display = accountMenu.style.display === 'block' ? 'none' : 'block';
       });
    
       chatButton.addEventListener('click', (event) => {
@@ -86,9 +87,10 @@ setPersistence(auth, browserLocalPersistence).then(() => {
       });
    
       document.addEventListener('click', (event) => {
-        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
+        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar') && !event.target.closest('#accountMenu') && !event.target.closest('#accountInfo')) {
           closeAllMenus();
           chatSidebar.classList.remove('active');
+          accountMenu.style.display = 'none';
         }
       });
     

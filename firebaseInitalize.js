@@ -25,7 +25,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
 
      heartButton.addEventListener('click', () => {
        // Replace 'liked-jobs.html' with the actual URL of the page you want to navigate to
-       location.assign("index.html");
+       window.location.href = 'liked-jobs.html';
      });
    
      function toggleMenu(menu) {
@@ -151,6 +151,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
        item.style.animationDelay = `${index * 0.1}s`;
        item.classList.add('animate__animated', 'animate__fadeInUp');
      });
+
 
     authAction.addEventListener('click', () => {
         if (auth.currentUser) {

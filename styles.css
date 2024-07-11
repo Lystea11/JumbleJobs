@@ -20,6 +20,39 @@ body, html {
   transition: transform 0.3s ease;
 }
 
+.no-more-jobs {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  display: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.no-more-jobs.show {
+  display: block;
+  animation: fadeIn 1s forwards;
+}
+
+.no-more-jobs h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.no-more-jobs p {
+  font-size: 1.5rem;
+  color: #666;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 #heartButton:hover {
   transform: scale(1.1);
 }

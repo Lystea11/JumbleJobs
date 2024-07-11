@@ -106,45 +106,45 @@ document.addEventListener('DOMContentLoaded', () => {
     let inLeftBuffer = false;
     let inRightBuffer = false;
 
+    const noMoreJobsElement = document.getElementById('no-more-jobs');
+
     function updateCards() {
-        wwwrn = mainList[currentCardIndex].www;
-        linkrn = mainList[currentCardIndex].twitter;
-        
-        
-        cards.forEach((card, index) => {
-            card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'spaceInUp');
-            if (index === currentCardIndex) {
-                card.classList.add('active');
-            }
-        });
+        if (currentCardIndex >= cards.length) {
+            // No more cards, show the message
+            noMoreJobsElement.classList.add('show');
+        } else {
+            wwwrn = mainList[currentCardIndex].www;
+            linkrn = mainList[currentCardIndex].twitter;
+            
+            cards.forEach((card, index) => {
+                card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'spaceInUp');
+                if (index === currentCardIndex) {
+                    card.classList.add('active');
+                }
+            });
+        }
     }
 
     function moveNext() {
-        console.log(currentCardIndex);
-        if (currentCardIndex >= 0) {
-            if (currentCardIndex == cards.length) {
-                
-            }
+        if (currentCardIndex < cards.length) {
             updateUserIndexLiked("add", currentCardIndex + 1);
             cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
             setTimeout(() => {
                 currentCardIndex++;
                 updateCards();
-            }, 900); // Match the animation duration of Magic CSS Animations
+            }, 900);
         }
     }
     
     function movePrev() {
-        if (currentCardIndex >= 0) {
-            if (currentCardIndex == cards.length) {
-                
-            }
-            updateUserIndexLiked("remove", currentCardIndex + 1);
-            cards[currentCardIndex].classList.add('magictime', 'tinLeftOut');
+        if (currentCardIndex > 0) {
+            updateUserIndexLiked("remove", currentCardIndex);
+            currentCardIndex--;
+            cards[currentCardIndex].classList.remove('exit-left', 'exit-right');
+            cards[currentCardIndex].classList.add('active', 'magictime', 'spaceInUp');
             setTimeout(() => {
-                currentCardIndex++;
                 updateCards();
-            }, 900); // Match the animation duration of Magic CSS Animations
+            }, 900);
         }
     }
 

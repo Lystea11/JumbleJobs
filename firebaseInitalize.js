@@ -20,77 +20,90 @@ setPersistence(auth, browserLocalPersistence).then(() => {
    
      let activeMenu = null;
      let isFirstNotificationOpen = true;
-   
-     function toggleMenu(menu, button) {
-       if (activeMenu && activeMenu !== menu) {
-         activeMenu.classList.remove('active');
-       }
-       
-       menu.classList.toggle('active');
-       
-       if (menu.classList.contains('active')) {
-         activeMenu = menu;
-         if (menu === notificationMenu && isFirstNotificationOpen) {
-           hideNotificationBadge();
-           isFirstNotificationOpen = false;
-         }
-       } else {
-         activeMenu = null;
-       }
-   
-       // Prevent immediate propagation to document click handler
-       setTimeout(() => {
-         button.blur();
-       }, 0);
-     }
-   
-     function hideNotificationBadge() {
-       notificationBadge.classList.add('hide');
-       notificationBadge.addEventListener('animationend', () => {
-         notificationBadge.style.display = 'none';
-       }, { once: true });
-     }
-   
-     function closeAllMenus() {
-       if (activeMenu) {
-         activeMenu.classList.remove('active');
-         activeMenu = null;
-       }
-       chatSidebar.classList.remove('active');
-     }
-   
-     notificationButton.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleMenu(notificationMenu, notificationButton);
+
+     const heartButton = document.getElementById('heartButton');
+
+     heartButton.addEventListener('click', () => {
+       // Replace 'liked-jobs.html' with the actual URL of the page you want to navigate to
+       window.location.href = 'liked-jobs.html';
      });
    
-     accountInfo.addEventListener('click', (event) => {
-       event.stopPropagation();
-       toggleMenu(accountMenu, accountInfo);
-     });
+     function toggleMenu(menu) {
+        if (activeMenu && activeMenu !== menu) {
+          activeMenu.classList.remove('active');
+        }
+        
+        if (activeMenu === menu) {
+          menu.classList.remove('active');
+          activeMenu = null;
+        } else {
+          menu.classList.add('active');
+          activeMenu = menu;
+        }
+    
+        if (menu === notificationMenu && isFirstNotificationOpen) {
+          hideNotificationBadge();
+          isFirstNotificationOpen = false;
+        }
+      }
    
-     chatButton.addEventListener('click', (event) => {
-       event.stopPropagation();
-       chatSidebar.classList.toggle('active');
-       closeAllMenus();
-     });
+      function hideNotificationBadge() {
+        notificationBadge.classList.add('hide');
+        notificationBadge.addEventListener('animationend', () => {
+          notificationBadge.style.display = 'none';
+        }, { once: true });
+      }
    
-     closeChatButton.addEventListener('click', () => {
-       chatSidebar.classList.remove('active');
-     });
+      function closeAllMenus() {
+        if (activeMenu) {
+          activeMenu.classList.remove('active');
+          activeMenu = null;
+        }
+      }
    
-     document.addEventListener('click', (event) => {
-       if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
-         closeAllMenus();
-       }
-     });
+      function toggleChatSidebar() {
+        chatSidebar.classList.toggle('active');
+        closeAllMenus();
+      }
    
-     // Prevent clicks inside menus from closing them
-     [notificationMenu, accountMenu, chatSidebar].forEach(element => {
-       element.addEventListener('click', (event) => {
-         event.stopPropagation();
-       });
-     });
+      notificationButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(notificationMenu);
+      });
+   
+      accountInfo.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleMenu(accountMenu);
+      });
+   
+      chatButton.addEventListener('click', (event) => {
+        event.stopPropagation();
+        toggleChatSidebar();
+      });
+    
+      closeChatButton.addEventListener('click', () => {
+        chatSidebar.classList.remove('active');
+      });
+   
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar')) {
+          closeAllMenus();
+          chatSidebar.classList.remove('active');
+        }
+      });
+    
+      // Prevent clicks inside menus from closing them
+      notificationMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+   
+      accountMenu.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
+    
+      chatSidebar.addEventListener('click', (event) => {
+        event.stopPropagation();
+      });
    
      // Chat functionality
      const chatContent = document.getElementById('chatContent');
@@ -105,7 +118,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
        }
    
        messageElement.innerHTML = `
-         <div class="chat-avatar">${isUser ? '👤' : '🤖'}</div>
+         <div class="chat-avatar">${isUser ? '👦' : '👤'}</div>
          <div class="chat-bubble">${message}</div>
        `;
    
@@ -119,8 +132,8 @@ setPersistence(auth, browserLocalPersistence).then(() => {
          addMessage(message, true);
          chatInput.value = '';
          setTimeout(() => {
-           addMessage(`You said: "${message}"`);
-         }, 1000);
+           addMessage(`Thank you! We will get in contact soon.`);
+         }, 1500);
        }
      }
    

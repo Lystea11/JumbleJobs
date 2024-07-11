@@ -214,7 +214,7 @@
                 const button = document.createElement('button');
                 button.textContent = 'Apply';
                 button.addEventListener('click', function() {
-                    window.open(mainList[id+1].www, "_blank", "noopener, noreferrer");
+                    window.open(mainList[id-1].www, "_blank", "noopener, noreferrer");
                     // Add more actions here as needed
                 });
                 

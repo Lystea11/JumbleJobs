@@ -127,26 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function moveNext() {
         if (currentCardIndex < cards.length) {
-            updateUserIndexLiked("add", currentCardIndex + 1);
-            cards[currentCardIndex].classList.add('magictime', 'tinRightOut');
-            setTimeout(() => {
-                currentCardIndex++;
-                updateCards();
-            }, 900);
+          updateUserIndexLiked("add", currentCardIndex + 1);
+          gsap.to(cards[currentCardIndex], { x: '100%', opacity: 0, duration: 0.9, ease: 'power1.inOut', onComplete: () => {
+            currentCardIndex++;
+            updateCards();
+          }});
         }
-    }
-    
-    function movePrev() {
+      }
+      
+      function movePrev() {
         if (currentCardIndex > 0) {
-            updateUserIndexLiked("remove", currentCardIndex);
+          updateUserIndexLiked("remove", currentCardIndex);
+          gsap.to(cards[currentCardIndex], { x: '-100%', opacity: 0, duration: 0.9, ease: 'power1.inOut', onComplete: () => {
             currentCardIndex--;
-            cards[currentCardIndex].classList.remove('exit-left', 'exit-right');
-            cards[currentCardIndex].classList.add('active', 'magictime', 'spaceInUp');
-            setTimeout(() => {
-                updateCards();
-            }, 900);
+            updateCards();
+            gsap.fromTo(cards[currentCardIndex], { x: '-100%', opacity: 0 }, { x: '0%', opacity: 1, duration: 0.9, ease: 'power1.inOut' });
+          }});
         }
-    }
+      }
 
     document.addEventListener('keydown', (event) => {
         if (isAnimating) return;
@@ -165,17 +163,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;
         const maxPercentage = 25; // Maximum percentage of the screen width
-    
+        
+        let percentage;
         if (mouseX < middleX) {
-            const percentage = (1 - (mouseX / window.innerWidth)) * maxPercentage;
-            semiCircleLeft.style.clipPath = `ellipse(${percentage}% 50% at 0% 50%)`;
-            semiCircleRight.style.clipPath = `ellipse(0% 50% at 100% 50%)`;
+          percentage = (1 - (mouseX / window.innerWidth)) * maxPercentage;
+          gsap.to(semiCircleLeft, { clipPath: `ellipse(${percentage}% 50% at 0% 50%)`, duration: 0.3, ease: 'power1.out' });
+          gsap.to(semiCircleRight, { clipPath: `ellipse(0% 50% at 100% 50%)`, duration: 0.3, ease: 'power1.out' });
         } else {
-            const percentage = ((mouseX / window.innerWidth) - 0.5) * 2 * maxPercentage;
-            semiCircleRight.style.clipPath = `ellipse(${percentage}% 50% at 100% 50%)`;
-            semiCircleLeft.style.clipPath = `ellipse(0% 50% at 0% 50%)`;
+          percentage = ((mouseX / window.innerWidth) - 0.5) * 2 * maxPercentage;
+          gsap.to(semiCircleRight, { clipPath: `ellipse(${percentage}% 50% at 100% 50%)`, duration: 0.3, ease: 'power1.out' });
+          gsap.to(semiCircleLeft, { clipPath: `ellipse(0% 50% at 0% 50%)`, duration: 0.3, ease: 'power1.out' });
         }
-    });
+      });
     document.addEventListener('mousedown', (event) => {
         const middleX = window.innerWidth / 2;
         const mouseX = event.clientX;

@@ -87,12 +87,15 @@ setPersistence(auth, browserLocalPersistence).then(() => {
       });
    
       document.addEventListener('click', (event) => {
-        if (!event.target.closest('#allMenu') && !event.target.closest('#chatSidebar') && !event.target.closest('#accountMenu') && !event.target.closest('#accountInfo')) {
-          closeAllMenus();
-          chatSidebar.classList.remove('active');
-          accountMenu.style.display = 'none';
+        if (!event.target.closest('#allMenu') && 
+            !event.target.closest('#chatSidebar') && 
+            !event.target.closest('#accountMenu') && 
+            !event.target.closest('#accountInfo')) {
+            closeAllMenus();
+            chatSidebar.classList.remove('active');
+            accountMenu.style.display = 'none';
         }
-      });
+    });
     
       // Prevent clicks inside menus from closing them
       notificationMenu.addEventListener('click', (event) => {

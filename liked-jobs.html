@@ -212,7 +212,11 @@
                 cardAction.className = 'card-action';
                 
                 const button = document.createElement('button');
-                button.textContent = 'Learn More';
+                button.textContent = 'Apply';
+                button.addEventListener('click', function() {
+                    location.assign(mainList[id].www, "_blank");
+                    // Add more actions here as needed
+                });
                 
                 cardAction.appendChild(button);
                 cardContent.appendChild(cardTitle);
@@ -220,7 +224,6 @@
                 cardContent.appendChild(cardAction);
                 card.appendChild(cardContent);
                 container.appendChild(card);
-                console.log("appending");
 
 
             } else {

@@ -65,10 +65,15 @@ setPersistence(auth, browserLocalPersistence).then(() => {
         chatSidebar.classList.toggle('active');
         closeAllMenus();
       }
-   
+      const notificationItems = document.querySelectorAll('.notification-item');
       notificationButton.addEventListener('click', (event) => {
         event.stopPropagation();
         toggleMenu(notificationMenu);
+
+        notificationItems.forEach((item, index) => {
+          item.style.animationDelay = `${index * 0.1}s`;
+          item.classList.add('animate__animated', 'animate__fadeInUp');
+        });
       });
    
       accountInfo.addEventListener('click', (event) => {
@@ -151,11 +156,7 @@ setPersistence(auth, browserLocalPersistence).then(() => {
      });
    
      // Animate notification items
-     const notificationItems = document.querySelectorAll('.notification-item');
-     notificationItems.forEach((item, index) => {
-       item.style.animationDelay = `${index * 0.1}s`;
-       item.classList.add('animate__animated', 'animate__fadeInUp');
-     });
+
 
 
     authAction.addEventListener('click', () => {

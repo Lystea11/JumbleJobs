@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function movePrev() {
-        if (currentCardIndex > 0) {
+        if (currentCardIndex < cards.length) {
             updateUserIndexLiked("remove", currentCardIndex);
             currentCardIndex++;
             cards[currentCardIndex].classList.add('magictime', 'tinLeftOut');

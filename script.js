@@ -140,8 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentCardIndex > 0) {
             updateUserIndexLiked("remove", currentCardIndex);
             currentCardIndex++;
-            cards[currentCardIndex].classList.remove('exit-left', 'exit-right');
-            cards[currentCardIndex].classList.add('active', 'magictime', 'tinLeftOut');
+            cards[currentCardIndex].classList.add('magictime', 'tinLeftOut');
             setTimeout(() => {
                 updateCards();
             }, 900);

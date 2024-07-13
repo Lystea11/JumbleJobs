@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             linkrn = mainList[currentCardIndex].twitter;
             
             cards.forEach((card, index) => {
-                card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut', 'spaceInUp');
+                card.classList.remove('active', 'exit-left', 'exit-right', 'magictime', 'tinRightOut', 'tinLeftOut');
                 if (index === currentCardIndex) {
                     card.classList.add('active');
                 }
@@ -139,9 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function movePrev() {
         if (currentCardIndex > 0) {
             updateUserIndexLiked("remove", currentCardIndex);
-            currentCardIndex--;
+            currentCardIndex++;
             cards[currentCardIndex].classList.remove('exit-left', 'exit-right');
-            cards[currentCardIndex].classList.add('active', 'magictime', 'spaceInUp');
+            cards[currentCardIndex].classList.add('active', 'magictime', 'tinLeftOut');
             setTimeout(() => {
                 updateCards();
             }, 900);

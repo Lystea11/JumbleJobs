@@ -6,7 +6,7 @@
 
   
 
-![Project Banner](https://github.com/Lystea11/EmileProj/Banner.png)
+![Project Banner](https://github.com/Lystea11/EmileProj/main/Banner.png)
 
   
 

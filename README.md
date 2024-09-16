@@ -6,7 +6,7 @@
 
   
 
-![Project Banner](https://github.com/Lystea11/JobFinder-Prototype/blob/main/Banner.png)
+![Project Banner](https://github.com/Lystea11/EmileProj/Banner.png)
 
   
 

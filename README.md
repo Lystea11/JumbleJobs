@@ -1,8 +1,8 @@
 # 🧑‍💻 JobFinder Prototype
 
-**Website URL:** [lystea11.github.io](https://lystea11.github.io/EmileProj)
+**Website URL:** [lystea11.github.io](https://lystea11.github.io/JumbleJobs)
 
-**Repository:** [Lystea11/EmileProj](https://github.com/Lystea11/EmileProj)
+**Repository:** [Lystea11/JumbleJobs](https://github.com/Lystea11/JumbleJobs)
 
   
 
